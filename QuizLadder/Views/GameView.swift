@@ -1,0 +1,29 @@
+//
+//  GameView.swift
+//  QuizLadder
+//
+//  Created by Justin Gray on 6/30/24.
+//
+
+import SwiftUI
+
+struct GameView: View {
+    
+    @ObservedObject var quizVM = QuizViewModel()
+    
+    var body: some View {
+        List{
+            ForEach(quizVM.questionSet) { question in
+                QuizQuestionView(qData: question)
+            }
+            
+        }.onAppear{
+            
+            quizVM.getQuestions()
+        }
+    }
+}
+
+#Preview {
+    GameView()
+}

@@ -10,6 +10,7 @@ import SwiftUI
 struct QuizQuestionView: View {
     
     var qData : QuestionData
+    
     var question : QuestionModel {
         get{
             return QuestionModel(dataIn: qData)
@@ -28,13 +29,14 @@ struct QuizQuestionView: View {
             .padding()
             VStack {
                 ForEach(qData.incorrect_answers.indices) { answer in
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Button(action: {print("Answered a question")}, label: {
                         Text(qData.incorrect_answers[answer])
+                            .frame(maxWidth: .infinity, alignment: .leading)
+        
                     })
-                    
                 }
-                
             }
+            .padding()
         }
     }
     
@@ -42,5 +44,5 @@ struct QuizQuestionView: View {
 
 #Preview {
         //QuizQuestionView()
-    QuizQuestionView(qData: QuestionData(question: "Question Text", correct_answer: "Question Answer", incorrect_answers: []))
+    QuizQuestionView(qData: QuestionData(question: "Question Text", correct_answer: "Question Answer", incorrect_answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"]))
 }

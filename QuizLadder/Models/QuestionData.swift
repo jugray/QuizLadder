@@ -51,6 +51,10 @@ struct QuestionData : Codable, Identifiable{
 
     }
     
+    func getMutatedString() -> NSAttributedString{
+       return NSAttributedString(string: question)
+    }
+    
     
 }
 

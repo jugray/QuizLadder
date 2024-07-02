@@ -12,6 +12,42 @@ struct QuestionList : Codable{
     let results : [QuestionData]
 }
 
+struct GameTracker{
+    var score = 0;
+    var gameOver = false;
+    
+    mutating func scoreQuestion(difficulty: String, correctAnswer: String, playerAnswer: String) {
+        
+        var correct = false
+        
+        if (playerAnswer == correctAnswer){
+            correct = true
+        }
+        else {
+            self.gameOver = true
+        }
+        
+        if (correct){
+            switch difficulty {
+                case "easy":
+                    score += 2
+                case "medium":
+                    score += 3
+                case "hard":
+                    score += 5
+                default:
+                    score += 0
+            }
+        }
+        print("\n\nScoring Question...")
+        print("Player answer: \(playerAnswer)")
+        print("Correct answer: \(correctAnswer)")
+        print("Answer Correct \(correct)")
+        print("Player score is now \(score)")
+    }
+    
+}
+
 struct QuestionModel{
     let data : QuestionData
     var answerOptions : [String]
@@ -35,6 +71,7 @@ struct QuestionData : Codable, Identifiable{
         return UUID()
     }
     let question: String
+    let difficulty : String
     let correct_answer: String
     var incorrect_answers : [String]
     

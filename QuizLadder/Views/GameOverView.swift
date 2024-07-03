@@ -8,20 +8,34 @@
 import SwiftUI
 
 struct GameOverView: View {
+    
+    let backgroundGradient = LinearGradient(
+        colors: [Color.pink, Color.orange],
+        startPoint: .topTrailing   , endPoint: .bottomLeading)
+    
+    var questionAnswer : String
+    var question : String
+    var score : Int
+    
     var body: some View {
-        Text("Game OVER!")
-<<<<<<< HEAD
-        //LMGTFY
-        Link("Jakir Hossain", destination: URL(string: "https://jakir.me")!)
-=======
->>>>>>> main
+        ZStack{
+            backgroundGradient
+                .ignoresSafeArea()
+            VStack {
+                Text("Game OVER!")
+                    .padding()
+                
+                    //LMGTFY
+                Text("Player Score: \(score)")
+                    .padding()
+                Text("Correct Answer: ")
+                Link(questionAnswer, destination: URL(string: "https://www.google.com/search?q=" + question)!)
+                    .buttonStyle(BorderlessButtonStyle())
+            }
+        }
     }
 }
 
 #Preview {
-    GameOverView()
-<<<<<<< HEAD
-    
-=======
->>>>>>> main
+    GameOverView(questionAnswer: "Question Answer", question: "Qestion Text", score: 0)
 }

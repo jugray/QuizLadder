@@ -9,10 +9,16 @@ import SwiftUI
 
 struct QuizQuestionView: View {
     
+    let backgroundGradient = LinearGradient(
+        colors: [Color.yellow, Color.orange],
+        startPoint: .topTrailing   , endPoint: .bottomLeading)
     var qData : QuestionData
     @Binding var scoredDeck : ScoredCards
 
     var body: some View {
+        ZStack{
+            backgroundGradient
+                .ignoresSafeArea()
         VStack{
             VStack {
                 Image(systemName: "doc.questionmark.fill")
@@ -31,10 +37,10 @@ struct QuizQuestionView: View {
                     }, label: {
                         Text(qData.incorrect_answers[answer])
                             .frame(maxWidth: .infinity, alignment: .leading)
-        
+                        
                     })
                     .buttonStyle(BorderlessButtonStyle())
-                    
+                }
     
                 }
             }

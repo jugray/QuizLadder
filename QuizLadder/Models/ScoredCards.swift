@@ -13,7 +13,6 @@ struct ScoredCards{
     var currentQuestion = 0 
     var score = 0;
     var gameOver = false
-    // answered = false
     
     mutating func scoreQuestion(questionIn: QuestionData, playerAnswer: String) {
         
@@ -29,6 +28,7 @@ struct ScoredCards{
         }
         else {
             self.gameOver = true
+            print("\n\n *** GAME OVER *** \nwomp womp...")
         }
         
         if (correct){

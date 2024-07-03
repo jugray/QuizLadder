@@ -34,7 +34,7 @@ struct GameView: View {
                         Text("\(scoredDeck.score)")
                         
                     }
-                        //Display progress view if the list is empty
+                    //Display progress view if the list is empty
                     if (quizVM.gameDeck.getLoadedQuestions().isEmpty){
                         HStack{
                             Spacer()
@@ -43,8 +43,15 @@ struct GameView: View {
                             Spacer()
                         }
                     }
+                    
+                    //If player answered incorrectly, end the game (maybe just decrement score for a wrong answer?)
                     else {
-                        QuizQuestionView(qData: quizVM.gameDeck.getLoadedQuestions()[scoredDeck.currentQuestion], scoredDeck: $scoredDeck)
+                        if (!scoredDeck.gameOver){
+                            QuizQuestionView(qData: quizVM.gameDeck.getLoadedQuestions()[scoredDeck.currentQuestion], scoredDeck: $scoredDeck)
+                        }
+                        else {
+                            GameOverView()
+                        }
                     }
                 }
                     ForEach(scoredDeck.passedQuestions.reversed()) { question in

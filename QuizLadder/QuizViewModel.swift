@@ -8,10 +8,13 @@
 import Foundation
 
 class QuizViewModel : ObservableObject{
-    
+
     @Published private(set) var questionSet = [QuestionData]()
+    @Published var gameDeck : GameDeckModel = GameDeckModel()
     
-    private let url = "https://opentdb.com/api.php?amount=1&type=multiple"
+    
+    //API URL
+    private let url = "https://opentdb.com/api.php?amount=50&type=multiple"
     
 
     func getQuestions() {
@@ -26,9 +29,8 @@ class QuizViewModel : ObservableObject{
                         if let data = data {
                             do {
                                 let results = try JSONDecoder().decode(QuestionList.self, from:data)
-                                print(results)
                                 self.questionSet = results.results
-                                self.shuffleOptions()
+                                self.gameDeck.setLoadedQuestions(questionsIn: results.results)
                             }
                             catch {
                                 print(error)
@@ -42,11 +44,5 @@ class QuizViewModel : ObservableObject{
         
     }
     
-    func shuffleOptions(){
-        for questions in questionSet.indices {
-            questionSet[questions].setQuestions()
-        }
-    
-    }
     
 }

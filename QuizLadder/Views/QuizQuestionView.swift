@@ -1,25 +1,17 @@
-    //
-    //  ContentView.swift
-    //  QuizLadder
-    //
-    //  Created by Justin Gray on 6/30/24.
-    //
+ //
+ //  ContentView.swift
+ //  QuizLadder
+ //
+ //  Created by Justin Gray on 6/30/24.
+ //
 
 import SwiftUI
 
 struct QuizQuestionView: View {
     
     var qData : QuestionData
-    //@State var gameData : GameFunctionModel = GameFunctionModel()
-    @Binding var deck : GameDeckModel
+    @Binding var scoredDeck : ScoredCards
 
-    
-    var question : QuestionModel {
-        get{
-            return QuestionModel(dataIn: qData)
-        }
-    }
-    
     var body: some View {
         VStack{
             VStack {
@@ -33,10 +25,8 @@ struct QuizQuestionView: View {
             VStack {
                 ForEach(qData.incorrect_answers.indices) { answer in
                     Button(action: {
-                        deck.scoreQuestion(difficulty: qData.difficulty,
-                                               correctAnswer: qData.correct_answer,
-                                               playerAnswer: qData.incorrect_answers[answer])
-                        deck.passed(questionIn: qData)
+                        scoredDeck.scoreQuestion(questionIn: qData, playerAnswer: qData.incorrect_answers[answer])
+                        scoredDeck.passed(questionIn: qData)
                         
                     }, label: {
                         Text(qData.incorrect_answers[answer])
@@ -44,6 +34,8 @@ struct QuizQuestionView: View {
         
                     })
                     .buttonStyle(BorderlessButtonStyle())
+                    
+    
                 }
             }
             .padding()
@@ -55,7 +47,7 @@ struct QuizQuestionView: View {
 #Preview {
     //Create struct to use preview with @State wrapper to fix error
     struct Preview:View {
-        @State var previewDeck = GameDeckModel()
+        @State var previewDeck = ScoredCards()
         
         var body : some View {
             
@@ -64,7 +56,7 @@ struct QuizQuestionView: View {
                 difficulty: "Difficulty",
                 correct_answer: "Question Answer",
                 incorrect_answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"]),
-                             deck: $previewDeck)
+                             scoredDeck: $previewDeck)
         }
     }
     return Preview()

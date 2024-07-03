@@ -10,27 +10,59 @@ import SwiftUI
 struct GameView: View {
     
     @ObservedObject var quizVM = QuizViewModel()
+    //@ObservedObject var deck : GameDeckModel =  quizVM.gameDeck
     
     //deck object contains passed questions, may just move all "game session" data here
-    @State var deck : GameDeckModel  = GameDeckModel()
-      
+    @State var scoredDeck : ScoredCards  = ScoredCards()
+    
+    let backgroundGradient = LinearGradient(
+        colors: [Color.indigo, Color.mint],
+        startPoint: .top, endPoint: .bottom)
+    
     
     var body: some View {
-        
-        List{
-            //Get passed questions from list and display
-            ForEach(deck.passedQuestions) { question in
-                //QuizQuestionView(qData: question)
-                QuizQuestionView(qData: question, deck: $deck)
+        ZStack{
+            backgroundGradient
+                .ignoresSafeArea()
+            List{
+                    //Score and current Question
+                Section{
+                    
+                    HStack{
+                        Text("Player Score: ")
+                        Spacer()
+                        Text("\(scoredDeck.score)")
+                        
+                    }
+                        //Display progress view if the list is empty
+                    if (quizVM.gameDeck.getLoadedQuestions().isEmpty){
+                        HStack{
+                            Spacer()
+                            Text("Loading ")
+                            ProgressView()
+                            Spacer()
+                        }
+                    }
+                    else {
+                        QuizQuestionView(qData: quizVM.gameDeck.getLoadedQuestions()[scoredDeck.currentQuestion], scoredDeck: $scoredDeck)
+                    }
+                }
+                
+                ForEach(scoredDeck.passedQuestions.reversed()) { question in
+                        //QuizQuestionView(qData: question)
+                    QuizQuestionView(qData: question, scoredDeck: $scoredDeck)
+                }
+                
             }
-            //Load questions for QuestionList
-            ForEach(quizVM.questionSet) { question in
-                QuizQuestionView(qData: question, deck: $deck)
+                //.listRowSpacing(10)
+            .listSectionSpacing(25)
+            .refreshable {
+                quizVM.getQuestions()
             }
-    
-        }.onAppear{
-            
-            quizVM.getQuestions()
+            .onAppear{
+                quizVM.getQuestions()
+                
+            }
         }
     }
 }

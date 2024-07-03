@@ -25,9 +25,6 @@ struct QuestionData : Codable, Identifiable{
     
     mutating func setQuestions(){
 
-        //answer_options.append(contentsOf: incorrect_answers)
-        print("\nSHUFFLEING!")
-        print ("\nPreShuffle:  \(incorrect_answers)")
         incorrect_answers.append(correct_answer)
         incorrect_answers.shuffle()
         print ("\nPostShuffle: \(incorrect_answers)")

@@ -9,23 +9,31 @@ import SwiftUI
 
 struct CompletedQuizQuestionView: View {
     
+    let backgroundGradient = LinearGradient(
+        colors: [Color.yellow, Color.orange],
+        startPoint: .topTrailing   , endPoint: .bottomLeading)
+    
     let questionText : String
     let questionAnswer : String
     
     var body: some View {
-
-        VStack{
-            Text(questionText)
-        }
-            .padding()
-        VStack{
-            Text(questionAnswer)
-                .frame(maxWidth: .infinity, alignment: .leading)
-
-        }
-        .padding()
+        
+        ZStack{
+            backgroundGradient
+                .ignoresSafeArea()  
+            VStack{
+                VStack{
+                    Text(questionText)
+                }
+                .padding()
+                VStack{
+                    Text(questionAnswer)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                }
+                .padding()
+            }}
     }
-    
 }
 
 #Preview {

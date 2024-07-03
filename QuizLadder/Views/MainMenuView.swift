@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainMenuView: View {
-    
+
     let backgroundGradient = LinearGradient(
         colors: [Color.mint, Color.red],
         startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -28,15 +28,16 @@ struct MainMenuView: View {
                             .padding()
                     }
                     //Check Scores
-                    Text("Leaderboard")
-                        .padding()
+                    NavigationLink(destination: LeaderboardView()){
+                        Text("LeaderBoard")
+                            .padding()
+                    }
                     
                     //Sign In
                     Text("Sign In")
                         .padding()
                 }
             }
-            
             
         }
     }

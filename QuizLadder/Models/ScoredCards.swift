@@ -29,6 +29,9 @@ struct ScoredCards{
         else {
             self.gameOver = true
             print("\n\n *** GAME OVER *** \nwomp womp...")
+            PlayerModel.shared.setLastScore(scoreIn: score)
+            print("\nPlayer score: \(PlayerModel.shared.getLastScore())")
+            print("\nPlayer's highscore: \(PlayerModel.shared.getHighScore())")
         }
         
         if (correct){

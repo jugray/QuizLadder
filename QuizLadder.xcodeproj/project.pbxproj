@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C355A132C35E5E200699DDB /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C355A122C35E5E200699DDB /* PlayerModel.swift */; };
+		0C355A152C35E86300699DDB /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C355A142C35E86300699DDB /* LeaderboardView.swift */; };
+		0C355A172C35E89C00699DDB /* LeaderboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C355A162C35E89C00699DDB /* LeaderboardModel.swift */; };
 		0C88C2102C31C7DC0061EEEC /* QuizLadderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C88C20F2C31C7DC0061EEEC /* QuizLadderApp.swift */; };
 		0C88C2122C31C7DC0061EEEC /* QuizQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C88C2112C31C7DC0061EEEC /* QuizQuestionView.swift */; };
 		0C88C2142C31C7DE0061EEEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C88C2132C31C7DE0061EEEC /* Assets.xcassets */; };
@@ -23,6 +26,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C355A122C35E5E200699DDB /* PlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerModel.swift; sourceTree = "<group>"; };
+		0C355A142C35E86300699DDB /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
+		0C355A162C35E89C00699DDB /* LeaderboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardModel.swift; sourceTree = "<group>"; };
 		0C88C20C2C31C7DC0061EEEC /* QuizLadder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizLadder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C88C20F2C31C7DC0061EEEC /* QuizLadderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizLadderApp.swift; sourceTree = "<group>"; };
 		0C88C2112C31C7DC0061EEEC /* QuizQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionView.swift; sourceTree = "<group>"; };
@@ -95,6 +101,7 @@
 				0C88C21E2C31D2BD0061EEEC /* MainMenuView.swift */,
 				0C88C2202C31D7E20061EEEC /* GameView.swift */,
 				0C88C2362C35C3100061EEEC /* GameOverView.swift */,
+				0C355A142C35E86300699DDB /* LeaderboardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -106,6 +113,8 @@
 				0C88C2282C33A94E0061EEEC /* QuestionModel.swift */,
 				0C88C22C2C33AE650061EEEC /* ScoredCards.swift */,
 				0C88C2302C34F96C0061EEEC /* GameDeckModel.swift */,
+				0C355A122C35E5E200699DDB /* PlayerModel.swift */,
+				0C355A162C35E89C00699DDB /* LeaderboardModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -186,11 +195,14 @@
 				0C88C2352C35BCE60061EEEC /* CompletedQuizQuestionView.swift in Sources */,
 				0C88C2122C31C7DC0061EEEC /* QuizQuestionView.swift in Sources */,
 				0C88C21F2C31D2BD0061EEEC /* MainMenuView.swift in Sources */,
+				0C355A132C35E5E200699DDB /* PlayerModel.swift in Sources */,
 				0C88C2212C31D7E20061EEEC /* GameView.swift in Sources */,
 				0C88C2372C35C3100061EEEC /* GameOverView.swift in Sources */,
 				0C88C2272C31F0DD0061EEEC /* QuizViewModel.swift in Sources */,
 				0C88C2102C31C7DC0061EEEC /* QuizLadderApp.swift in Sources */,
+				0C355A172C35E89C00699DDB /* LeaderboardModel.swift in Sources */,
 				0C88C2242C31DBC20061EEEC /* QuestionData.swift in Sources */,
+				0C355A152C35E86300699DDB /* LeaderboardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

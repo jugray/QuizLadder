@@ -67,7 +67,9 @@
                 .sheet(isPresented:$scoredDeck.gameOver) {
                     GameOverView(questionAnswer: quizVM.gameDeck.getLoadedQuestions()[scoredDeck.currentQuestion].correct_answer ,
                                  question: quizVM.gameDeck.getLoadedQuestions()[scoredDeck.currentQuestion].question, score: scoredDeck.score)
+                    
                     }
+                .scrollContentBackground(.hidden)
                 //.listRowSpacing(0)
                 .listSectionSpacing(25)
                 .refreshable {

@@ -29,6 +29,7 @@ class GameDeckModel : Observable{
         }
     }
     
+    
     func getCurrentCard() -> QuestionData{
         return loadedQuestions[currentCard]
     }

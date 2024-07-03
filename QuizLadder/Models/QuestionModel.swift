@@ -8,7 +8,7 @@
 import Foundation
 
 struct QuestionModel{
-    let data : QuestionData
+    var data : QuestionData
     var answerOptions : [String]
     var score : Int
     
@@ -16,11 +16,6 @@ struct QuestionModel{
         data = dataIn
         score = 0
         answerOptions = []
-        setQuestions()
     }
     
-    mutating func setQuestions(){
-        self.answerOptions.append(contentsOf: data.incorrect_answers)
-
-    }
 }

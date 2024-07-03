@@ -17,9 +17,9 @@ import Foundation
         var id : UUID{
             return UUID()
         }
-        let question: String
+        var question: String
         let difficulty : String
-        let correct_answer: String
+        var correct_answer: String
         var incorrect_answers : [String]
         
     
@@ -27,7 +27,21 @@ import Foundation
 
         incorrect_answers.append(correct_answer)
         incorrect_answers.shuffle()
+        scrubHTML()
         print ("\nPostShuffle: \(incorrect_answers)")
+    }
+        
+    mutating func scrubHTML(){
+        var dontLike: [(String, String)] = [("&quot;","\""),("&#039;","\'"),("&amp", "&")]
+        
+        for htmlStrings in dontLike{
+            self.question = self.question.replacingOccurrences(of: htmlStrings.0, with: htmlStrings.1)
+            self.correct_answer = self.correct_answer.replacingOccurrences(of: htmlStrings.0, with: htmlStrings.1)
+            for incorrect_answer in incorrect_answers.indices {
+                incorrect_answers[incorrect_answer] =
+                    self.incorrect_answers[incorrect_answer].replacingOccurrences(of: htmlStrings.0, with: htmlStrings.1)
+            }
+        }
 
     }
     

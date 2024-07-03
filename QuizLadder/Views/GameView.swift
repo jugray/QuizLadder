@@ -47,14 +47,13 @@ struct GameView: View {
                         QuizQuestionView(qData: quizVM.gameDeck.getLoadedQuestions()[scoredDeck.currentQuestion], scoredDeck: $scoredDeck)
                     }
                 }
-                
-                ForEach(scoredDeck.passedQuestions.reversed()) { question in
-                        //QuizQuestionView(qData: question)
-                    QuizQuestionView(qData: question, scoredDeck: $scoredDeck)
-                }
-                
+                    ForEach(scoredDeck.passedQuestions.reversed()) { question in
+                            //QuizQuestionView(qData: question)
+                        CompletedQuizQuestionView(questionText: question.question, questionAnswer: question.correct_answer)
+                    }
+                                
             }
-                //.listRowSpacing(10)
+            //.listRowSpacing(0)
             .listSectionSpacing(25)
             .refreshable {
                 quizVM.getQuestions()

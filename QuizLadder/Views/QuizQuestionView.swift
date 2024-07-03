@@ -20,13 +20,13 @@ struct QuizQuestionView: View {
                     .foregroundStyle(.tint)
                     .padding()
                 Text(qData.question)
+                    .frame(maxWidth: .infinity, alignment: .center)
             }
             .padding()
             VStack {
                 ForEach(qData.incorrect_answers.indices) { answer in
                     Button(action: {
                         scoredDeck.scoreQuestion(questionIn: qData, playerAnswer: qData.incorrect_answers[answer])
-                        scoredDeck.passed(questionIn: qData)
                         
                     }, label: {
                         Text(qData.incorrect_answers[answer])

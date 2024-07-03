@@ -7,21 +7,21 @@
 
 import Foundation
 
-struct QuestionList : Codable{
-    let response_code : Int
-    let results : [QuestionData]
-}
-
-
-struct QuestionData : Codable, Identifiable{
-    var id : UUID{
-        return UUID()
+    struct QuestionList : Codable{
+        let response_code : Int
+        let results : [QuestionData]
     }
-    let question: String
-    let difficulty : String
-    let correct_answer: String
-    var incorrect_answers : [String]
-    
+
+
+    struct QuestionData : Codable, Identifiable{
+        var id : UUID{
+            return UUID()
+        }
+        let question: String
+        let difficulty : String
+        let correct_answer: String
+        var incorrect_answers : [String]
+        
     
     mutating func setQuestions(){
 
@@ -30,7 +30,6 @@ struct QuestionData : Codable, Identifiable{
         print ("\nPostShuffle: \(incorrect_answers)")
 
     }
-    
     
 }
 

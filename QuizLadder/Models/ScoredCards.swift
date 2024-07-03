@@ -19,6 +19,11 @@ struct ScoredCards{
         
         var correct = false
         
+        print("\n\nScoring Question...")
+        print("Player answer: \(playerAnswer)")
+        print("Correct answer: \(questionIn.correct_answer)")
+        
+        
         if (playerAnswer == questionIn.correct_answer){
             correct = true
         }
@@ -37,18 +42,16 @@ struct ScoredCards{
                 default:
                     score += 0
             }
-        }
-        print("\n\nScoring Question...")
-        print("Player answer: \(playerAnswer)")
-        print("Correct answer: \(questionIn.correct_answer)")
-        print("Answer Correct \(correct)")
-        print("Player score is now \(score)")
-    }
+            
+            print("Answer Correct \(correct)")
+            print("Player score is now \(score)")
     
-    mutating func passed(questionIn: QuestionData){
-        self.passedQuestions.append(questionIn)
-        print("Adding passed question to deck\(questionIn.question)")
-        self.currentQuestion += 1
-        
+            var newQuestion = QuestionData(question: questionIn.question, difficulty: questionIn.difficulty, correct_answer: questionIn.correct_answer, incorrect_answers: [questionIn.correct_answer])
+            
+            self.passedQuestions.append(newQuestion)
+            print("\nAdding passed question to deck.")
+            self.currentQuestion += 1
+        }
+     
     }
 }

@@ -36,10 +36,10 @@ struct QuizQuestionView: View {
                         
                     }, label: {
                         Text(qData.incorrect_answers[answer])
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .frame(maxWidth: .infinity, alignment: .center)
                         
                     })
-                    .buttonStyle(BorderlessButtonStyle())
+                    .buttonStyle(.bordered)
                 }
     
                 }

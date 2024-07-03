@@ -27,14 +27,17 @@
                     .ignoresSafeArea()
                 List{
                         //Score and current Question
-                    Section{
- 
+                    Section {
                         HStack{
                             Text("Player Score: ")
+                                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                             Spacer()
                             Text("\(scoredDeck.score)")
+                                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                             
                         }
+                        .listRowBackground(Color.clear)
+                        
                         
                         //Display progress view if the list is empty
                         if (quizVM.gameDeck.getLoadedQuestions().isEmpty){
@@ -44,11 +47,13 @@
                                 ProgressView()
                                 Spacer()
                             }
+                            
                         }
                         else {
                             // Normal gameplay, load next card.
                             if (!scoredDeck.gameOver){
                                 QuizQuestionView(qData: quizVM.gameDeck.getLoadedQuestions()[scoredDeck.currentQuestion], scoredDeck: $scoredDeck)
+                                    .listRowBackground(Color.clear)
                             }
                             
                             // Player has goofed, shut it down
@@ -61,6 +66,7 @@
                         ForEach(scoredDeck.passedQuestions.reversed()) { question in
                                 //QuizQuestionView(qData: question)
                             CompletedQuizQuestionView(questionText: question.question, questionAnswer: question.correct_answer)
+                                .listRowBackground(Color.clear)
                         }
                                     
                 }
@@ -70,6 +76,7 @@
                     
                     }
                 .scrollContentBackground(.hidden)
+                
                 //.listRowSpacing(0)
                 .listSectionSpacing(25)
                 .refreshable {

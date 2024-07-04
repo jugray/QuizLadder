@@ -16,7 +16,7 @@
         @State var scoredDeck : ScoredCards  = ScoredCards()
         
         let backgroundGradient = LinearGradient(
-            colors: [Color.indigo, Color.mint],
+            colors: [Color("NeonGreen"),Color("CyberPurple")],
             startPoint: .top, endPoint: .bottom)
         
         

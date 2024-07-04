@@ -10,7 +10,7 @@ import SwiftUI
 struct MainMenuView: View {
 
     let backgroundGradient = LinearGradient(
-        colors: [Color.mint, Color.red],
+        colors: [Color("CyberPurple"),Color("SuperPink")],
         startPoint: .topLeading, endPoint: .bottomTrailing)
     
     @State var signInVM : SignInViewModel = SignInViewModel()
@@ -21,17 +21,31 @@ struct MainMenuView: View {
             ZStack{
                 backgroundGradient
                     .ignoresSafeArea()
+                    
                 VStack{
-                    Text(#"QUIZ LADDER"#)
-                        .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                    Text("QuizLadder")
+                        .foregroundStyle(Color("Cyan"))
+                        .font(.system(size: 60, weight: .heavy ,design: .monospaced))
+                        .italic()
+                    
+                        
                     //Play Game
                     NavigationLink(destination: GameView()){
                         Text("New Game")
+                            .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
+                            .foregroundStyle(Color("NeonYellow"))
+                            .font(.system(size: 20, weight: .heavy ,design: .monospaced))
+                            .border(Color("NuRed"), width: 2)
                             .padding()
                     }
+                    
                     //Check Scores
                     NavigationLink(destination: LeaderboardView()){
                         Text("LeaderBoard")
+                            .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
+                            .foregroundStyle(Color("NeonYellow"))
+                            .font(.system(size: 20, weight: .heavy ,design: .monospaced))
+                            .border(Color("NuRed"), width: 2)
                             .padding()
                     }
                     
@@ -39,6 +53,10 @@ struct MainMenuView: View {
                     if signInVM.signedIn == true {
                         NavigationLink(destination: SignInView(signInVM: $signInVM)){
                             Text("Sign Out")
+                                .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
+                                .foregroundStyle(Color("NeonYellow"))
+                                .font(.system(size: 20, weight: .heavy ,design: .monospaced))
+                                .border(Color("NuRed"), width: 2)
                                 .padding()
                             
                         }
@@ -46,8 +64,11 @@ struct MainMenuView: View {
                     else{
                         NavigationLink(destination: SignInView(signInVM: $signInVM)){
                             Text("Sign In")
+                                .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
+                                .foregroundStyle(Color("NeonYellow"))
+                                .font(.system(size: 20, weight: .heavy ,design: .monospaced))
+                                .border(Color("NuRed"), width: 2)
                                 .padding()
-                            
                         }
                     }
                 }

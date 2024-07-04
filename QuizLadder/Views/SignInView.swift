@@ -12,7 +12,7 @@ struct SignInView: View {
     @Binding var signInVM : SignInViewModel
     
     let backgroundGradient = LinearGradient(
-        colors: [Color.yellow, Color.orange],
+        colors: [Color("NeonGreen"),Color("CyberPurple")],
         startPoint: .topTrailing   , endPoint: .bottomLeading)
     
     var body: some View {

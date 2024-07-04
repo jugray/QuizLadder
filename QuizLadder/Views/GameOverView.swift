@@ -10,7 +10,7 @@ import SwiftUI
 struct GameOverView: View {
     
     let backgroundGradient = LinearGradient(
-        colors: [Color.pink, Color.orange],
+        colors: [Color("NeonGreen"),Color.red],
         startPoint: .topTrailing   , endPoint: .bottomLeading)
     
     var questionAnswer : String

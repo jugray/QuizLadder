@@ -10,7 +10,7 @@ import SwiftUI
 struct LeaderboardView: View {
 
     let backgroundGradient = LinearGradient(
-        colors: [Color.indigo, Color.mint],
+        colors: [Color("NeonGreen"),Color("CyberPurple")],
         startPoint: .top, endPoint: .bottom)
     
     var body: some View {

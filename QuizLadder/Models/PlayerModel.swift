@@ -7,12 +7,14 @@
 
 import Foundation
 
-class PlayerModel{
+class PlayerModel :ObservableObject{
     
     private var playerName : String
     private var playerScore : Int
     private var playerHighScore : Int
     private var leaderboard: LeaderboardModel
+    @Published private var playerID : String?
+    
     
     static let shared = PlayerModel()
     private init(){
@@ -20,6 +22,19 @@ class PlayerModel{
         self.playerScore = 0
         self.playerHighScore = 0
         self.leaderboard = LeaderboardModel()
+        self.playerID = nil
+    }
+    
+   func isSignedIn() -> Bool{
+        return self.playerID != nil
+    }
+    
+    func setPlayerID(idIn: String){
+        self.playerID = idIn
+    }
+    
+    func getPlayerID() -> String {
+        return self.playerID!
     }
     
     func getName() -> String{

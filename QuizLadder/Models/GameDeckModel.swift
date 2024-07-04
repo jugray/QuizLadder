@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GameDeckModel : Observable{
+class GameDeckModel : ObservableObject{
     @Published var loadedQuestions: [QuestionData] = []
     @Published var currentCard = 0
     

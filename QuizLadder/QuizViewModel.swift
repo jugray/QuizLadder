@@ -14,7 +14,7 @@ class QuizViewModel : ObservableObject{
     
     
     //API URL
-    private let url = "https://opentdb.com/api.php?amount=50&type=multiple"
+    private let url = "https://opentdb.com/api.php?amount=1&type=multiple"
     
 
     func getQuestions() {

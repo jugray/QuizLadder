@@ -13,6 +13,8 @@ struct MainMenuView: View {
         colors: [Color.mint, Color.red],
         startPoint: .topLeading, endPoint: .bottomTrailing)
     
+    @State var signInVM : SignInViewModel = SignInViewModel()
+    
     var body: some View {
         NavigationView{
         
@@ -33,15 +35,26 @@ struct MainMenuView: View {
                             .padding()
                     }
                     
-                    //Sign In
-                    Text("Sign In")
-                        .padding()
+                    //Sign In / Sign Out
+                    if signInVM.signedIn == true {
+                        NavigationLink(destination: SignInView(signInVM: $signInVM)){
+                            Text("Sign Out")
+                                .padding()
+                            
+                        }
+                    }
+                    else{
+                        NavigationLink(destination: SignInView(signInVM: $signInVM)){
+                            Text("Sign In")
+                                .padding()
+                            
+                        }
+                    }
                 }
+                
             }
-            
         }
     }
-    
 }
 
 #Preview {

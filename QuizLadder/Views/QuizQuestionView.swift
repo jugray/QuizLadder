@@ -46,6 +46,7 @@ struct QuizQuestionView: View {
             }
             .padding()
         }
+        .navigationTitle("Quiz!")
     }
     
 }
@@ -56,14 +57,17 @@ struct QuizQuestionView: View {
         @State var previewDeck = ScoredCards()
         
         var body : some View {
-            
-            QuizQuestionView(qData: QuestionData(
-                question: "Question Text",
-                difficulty: "Difficulty",
-                correct_answer: "Question Answer",
-                incorrect_answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"]),
-                             scoredDeck: $previewDeck)
+            NavigationStack{
+                QuizQuestionView(qData: QuestionData(
+                    question: "Question Text",
+                    difficulty: "Difficulty",
+                    correct_answer: "Question Answer",
+                    incorrect_answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"]),
+                                 scoredDeck: $previewDeck)
+            }
         }
     }
-    return Preview()
-}
+   
+        return Preview()
+    }
+

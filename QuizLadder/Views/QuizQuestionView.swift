@@ -13,7 +13,10 @@ struct QuizQuestionView: View {
         colors: [Color.yellow, Color.orange],
         startPoint: .topTrailing   , endPoint: .bottomLeading)
     var qData : QuestionData
-    @Binding var scoredDeck : ScoredCards
+    var quizVM : QuizViewModel
+    
+    
+    //@Binding var scoredDeck : ScoredCards
 
     var body: some View {
         ZStack{
@@ -32,7 +35,7 @@ struct QuizQuestionView: View {
             VStack {
                 ForEach(qData.incorrect_answers.indices) { answer in
                     Button(action: {
-                        scoredDeck.scoreQuestion(questionIn: qData, playerAnswer: qData.incorrect_answers[answer])
+                        quizVM.gameDeck.scoreQuestion(questionIn: qData, playerAnswer: qData.incorrect_answers[answer])
                         
                     }, label: {
                         Text(qData.incorrect_answers[answer])
@@ -54,7 +57,8 @@ struct QuizQuestionView: View {
 #Preview {
     //Create struct to use preview with @State wrapper to fix error
     struct Preview:View {
-        @State var previewDeck = ScoredCards()
+        //@State var previewDeck = ScoredCards()
+        var previewQuizVM = QuizViewModel()
         
         var body : some View {
             NavigationStack{
@@ -63,7 +67,7 @@ struct QuizQuestionView: View {
                     difficulty: "Difficulty",
                     correct_answer: "Question Answer",
                     incorrect_answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"]),
-                                 scoredDeck: $previewDeck)
+                                 quizVM: previewQuizVM)
             }
         }
     }

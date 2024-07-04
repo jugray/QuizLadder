@@ -13,20 +13,30 @@ class PlayerModel :ObservableObject{
     private var playerScore : Int
     private var playerHighScore : Int
     private var leaderboard: LeaderboardModel
-    @Published private var playerID : String?
+    private var playerID : String
+    private var email = ""
+    private var loggedIn = false;
     
+    //Do we only want one...
+    //static let shared = PlayerModel()
     
-    static let shared = PlayerModel()
-    private init(){
+    init(){
         self.playerName = "Default Player"
         self.playerScore = 0
         self.playerHighScore = 0
         self.leaderboard = LeaderboardModel()
-        self.playerID = nil
+        self.playerID = ""
+        self.email = ""
+        self.loggedIn = false
     }
     
-   func isSignedIn() -> Bool{
-        return self.playerID != nil
+   func getloggedIn() -> Bool{
+        return self.loggedIn
+    }
+    
+    func setLoggedIn(boolIn: Bool){
+        self.loggedIn = boolIn
+        
     }
     
     func setPlayerID(idIn: String){
@@ -34,7 +44,7 @@ class PlayerModel :ObservableObject{
     }
     
     func getPlayerID() -> String {
-        return self.playerID!
+        return self.playerID
     }
     
     func getName() -> String{
@@ -45,6 +55,13 @@ class PlayerModel :ObservableObject{
         self.playerName = nameIn
         }
     
+    func getEmail() -> String{
+        return self.email
+    }
+    
+    func setEmail(emailIn: String){
+        self.email = emailIn
+    }
     
     func getLastScore() ->Int{
         return self.playerScore
@@ -63,12 +80,12 @@ class PlayerModel :ObservableObject{
             self.leaderboard.addLeaderBoardEntry(leaderIn: Leader(name: self.playerName, Score: self.playerScore))
             print("Current leaderboard: ")
             print(self.leaderboard.getLeaderBoard())
-            
         }
     }
     
-    func leaderBoardAccess() -> LeaderboardModel{
+    func getLeaderBoard() -> LeaderboardModel{
         return self.leaderboard
     }
     
+   
 }

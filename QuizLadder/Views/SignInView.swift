@@ -9,7 +9,9 @@ import SwiftUI
 
 struct SignInView: View {
     
-    @Binding var signInVM : SignInViewModel
+    @Binding var playerVM : PlayerViewModel
+    @State var tempEmail = ""
+    @State var tempPass = ""
     
     let backgroundGradient = LinearGradient(
         colors: [Color("NeonGreen"),Color("CyberPurple")],
@@ -22,15 +24,16 @@ struct SignInView: View {
             VStack {
         
                 Section{
-                    TextField("Email", text: $signInVM.email)
-                    SecureField("Password", text: $signInVM.password)
+                    TextField("Email", text: $tempEmail)
+                    SecureField("Password", text: $tempPass)
                 }
 
                 .padding()
                 
                 VStack{
+                    //Create new user
                     Button(action: {
-                        signInVM.loginUser(emailIn: signInVM.email, passwordIn: signInVM.password)
+                        playerVM.loginUser(emailIn: tempEmail, passwordIn: tempPass)
                     }, label: {
                         Text("Sign In")
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -38,8 +41,9 @@ struct SignInView: View {
                     })
                     .buttonStyle(.bordered)
                     
+                    //Sign in existing user
                     Button(action: {
-                        signInVM.createUser(emailIn: signInVM.email, passwordIn: signInVM.password)
+                        playerVM.createUser(emailIn: tempEmail, passwordIn: tempPass)
                     }, label: {
                         Text("Register")
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -57,10 +61,10 @@ struct SignInView: View {
 
 #Preview {
     struct Preview:View{
-        @State var signInVMPreview = SignInViewModel()
+        @State var signInVMPreview = PlayerViewModel()
         
         var body : some View{
-            SignInView(signInVM: $signInVMPreview)
+            SignInView(playerVM: $signInVMPreview)
         }
     }
     return Preview()

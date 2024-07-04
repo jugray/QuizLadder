@@ -10,13 +10,14 @@
     struct GameView: View {
         
         @ObservedObject var quizVM = QuizViewModel()
-        //@ObservedObject var deck : GameDeckModel =  quizVM.gameDeck
+        @ObservedObject var playerVM:PlayerViewModel
+        
         
         //deck object contains passed questions, may just move all "game session" data here
         @State var scoredDeck : ScoredCards  = ScoredCards()
         
         let backgroundGradient = LinearGradient(
-            colors: [Color("NeonGreen"),Color("CyberPurple")],
+            colors: [Color.indigo, Color.mint],
             startPoint: .top, endPoint: .bottom)
         
         
@@ -91,5 +92,13 @@
     }
 
     #Preview {
-        GameView()
+        struct Preview:View {
+            
+            @ObservedObject var playerVM:PlayerViewModel = PlayerViewModel()
+        
+            var body: some View {
+                GameView(playerVM:playerVM)
+            }
+        }
+        return Preview()
     }

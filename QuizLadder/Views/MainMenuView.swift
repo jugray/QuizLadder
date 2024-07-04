@@ -13,7 +13,7 @@ struct MainMenuView: View {
         colors: [Color("CyberPurple"),Color("SuperPink")],
         startPoint: .topLeading, endPoint: .bottomTrailing)
     
-    @State var signInVM : SignInViewModel = SignInViewModel()
+    @State var playerVM : PlayerViewModel = PlayerViewModel()
     
     var body: some View {
         NavigationView{
@@ -30,7 +30,7 @@ struct MainMenuView: View {
                     
                         
                     //Play Game
-                    NavigationLink(destination: GameView()){
+                    NavigationLink(destination: GameView(playerVM: playerVM)){
                         Text("New Game")
                             .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
                             .foregroundStyle(Color("NeonYellow"))
@@ -50,8 +50,8 @@ struct MainMenuView: View {
                     }
                     
                     //Sign In / Sign Out
-                    if signInVM.signedIn == true {
-                        NavigationLink(destination: SignInView(signInVM: $signInVM)){
+                    if playerVM.currentPlayer.getloggedIn() == true{
+                        NavigationLink(destination: SignInView(playerVM: $playerVM)){
                             Text("Sign Out")
                                 .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
                                 .foregroundStyle(Color("NeonYellow"))
@@ -62,7 +62,7 @@ struct MainMenuView: View {
                         }
                     }
                     else{
-                        NavigationLink(destination: SignInView(signInVM: $signInVM)){
+                        NavigationLink(destination: SignInView(playerVM: $playerVM)){
                             Text("Sign In")
                                 .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
                                 .foregroundStyle(Color("NeonYellow"))

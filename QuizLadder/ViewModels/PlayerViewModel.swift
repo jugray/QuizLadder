@@ -9,13 +9,9 @@ import Foundation
 import FirebaseAuth
 
 
-class SignInViewModel: ObservableObject{
-    @Published var email = ""
-    @Published var password = ""
-    @Published var uid = ""
-    @Published var signedIn = false;
-    
-   
+class PlayerViewModel: ObservableObject{
+
+    @Published var currentPlayer : PlayerModel = PlayerModel()
     
     func createUser(emailIn: String, passwordIn: String){
         
@@ -26,8 +22,7 @@ class SignInViewModel: ObservableObject{
             else {
                 if let authResult = authResult{
                     print(authResult)
-                    self.email = authResult.user.email!
-                    self.password = passwordIn
+                    self.currentPlayer.setEmail(emailIn: authResult.user.email!)
                     //self.uid = authResult.user.uid
                     print("\n*** Firebase Registration ***")
                     print("Email Registered: \(String(describing: authResult.user.email))")
@@ -47,13 +42,13 @@ class SignInViewModel: ObservableObject{
             }
             else {
                 if let authResult = authResult{
-                    PlayerModel.shared.setPlayerID(idIn: authResult.user.uid)
-                    print("\n*** Firebase SignIn ***")
+                    self?.currentPlayer.setPlayerID(idIn: authResult.user.uid)
+                    print("\n*** Firebase SignIn Response***")
                     print("Email: \(String(describing: authResult.user.email))")
                     print("UserUID: \(authResult.user.uid)")
-                    print("CurrentUID is now: \(PlayerModel.shared.getPlayerID())")
-                    self?.signedIn = true;
-                    print(self?.signedIn)
+                    print("CurrentUID is now: \(self?.currentPlayer.getPlayerID())")
+                    self?.currentPlayer.setLoggedIn(boolIn: true)
+                    
                 }
             }
         }

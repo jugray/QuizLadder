@@ -20,6 +20,7 @@ struct LeaderboardView: View {
 
             VStack {
                 List{
+                    /*
                     ForEach(PlayerModel.shared.leaderBoardAccess().getLeaderBoard()){ leader in
                         HStack{
                             Text("\(PlayerModel.shared.getName())")
@@ -28,6 +29,8 @@ struct LeaderboardView: View {
                         }
                         
                     }
+                     */
+                    Text("")
                 }
                 .scrollContentBackground(.hidden)
                 

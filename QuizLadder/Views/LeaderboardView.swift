@@ -1,52 +1,64 @@
-//
-//  LeaderboardView.swift
-//  QuizLadder
-//
-//  Created by Justin Gray on 7/3/24.
-//
+    //
+    //  LeaderboardView.swift
+    //  QuizLadder
+    //
+    //  Created by Justin Gray on 7/3/24.
+    //
 
 import SwiftUI
 
 struct LeaderboardView: View {
     
     var playerVM : PlayerViewModel
-
+    @ObservedObject var leaderBoardVM = FirestoreViewModel()
+    
     let backgroundGradient = LinearGradient(
         colors: [Color("NuRed"),Color("NeonYellow"),Color("CoLightBlue"),Color("CoMidBlue"),Color("CoDarkBlue")],
         startPoint: .topLeading, endPoint: .bottomTrailing)
     
     var body: some View {
-    
+        
         ZStack{
             backgroundGradient.ignoresSafeArea()
-
+            
             VStack {
-                List{
-                    
-                    ForEach(playerVM.currentPlayer.leaderboardAccess().getLeaderBoard()){ leader in
-                        if leader.name != ""{
+                Section{
+                    Text("Top Climbers")
+                        .padding()
+                }
+                Section{
+                    List{
+                        ForEach(leaderBoardVM.leaders) { leader in
                             HStack{
-                                Text("\(playerVM.currentPlayer.getName())")
+                                Text("\(leader.getPlayerName())")
                                 Spacer()
-                                Text("\(playerVM.currentPlayer.getHighScore())")
+                                Text("\(leader.getHighScore())")
+                            }
+                            .onAppear(){
+                                print("\nPosting ID: \n\(String(describing: leader.id))")
+                                print("Name: \(leader.getPlayerName())")
+                                print("Score: \(leader.getHighScore())")
                             }
                         }
-                        
                     }
-                   
                 }
-                .scrollContentBackground(.hidden)
-               
+                .padding()
             }
             .onAppear{
                 print ("*** Loading Leaderboard *** ")
-                print(playerVM.currentPlayer.leaderboardAccess().getLeaderBoard())
+                Task {
+                    await leaderBoardVM.getLeaders()
+                }
+                print ("FirebaseDB connected, adding DB data:")
                 
             }
+            .scrollContentBackground(.hidden)
             
         }
     }
 }
+
+
 
 #Preview {
     LeaderboardView(playerVM: PlayerViewModel())

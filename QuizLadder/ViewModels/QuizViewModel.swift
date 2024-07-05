@@ -14,8 +14,15 @@ class QuizViewModel : ObservableObject{
     
     
     
-    //API URL
-    private let url = "https://opentdb.com/api.php?amount=50&type=multiple"
+    /*API URL
+     
+     More Info: https://opentdb.com/api_config.php
+     amount = numer of questions per request
+     
+     
+    */
+    //private let url = "https://opentdb.com/api.php?amount=50"
+    private let url = "https://opentdb.com/api.php?amount=10&category=9&type=multiple"
     
     //Get new deck and reset game conditions, lets play!
     func newGame(){

@@ -12,19 +12,19 @@ class PlayerModel :ObservableObject{
     @Published private var playerName : String
     @Published private var playerScore : Int
     @Published private var playerHighScore : Int
-    @Published private var leaderboard: LeaderboardModel
+    @Published private var leaderboardVM: FirestoreViewModel
     @Published private var playerID : String
     @Published private var email = ""
     @Published private var loggedIn = false;
     
-    //Do we only want one...
+    //Do I want only one?
     //static let shared = PlayerModel()
     
     init(){
         self.playerName = "Default Player"
         self.playerScore = 0
         self.playerHighScore = 0
-        self.leaderboard = LeaderboardModel()
+        self.leaderboardVM = FirestoreViewModel()
         self.playerID = ""
         self.email = ""
         self.loggedIn = false
@@ -73,19 +73,24 @@ class PlayerModel :ObservableObject{
     
     func setLastScore(scoreIn: Int){
         self.playerScore = scoreIn
+        
         if self.playerScore > self.playerHighScore {
             print("New player high score!")
             print("Updating high score and leaderboard")
             self.playerHighScore =  self.playerScore
-            self.leaderboard.addLeaderBoardEntry(leaderIn: Leader(name: self.playerName, Score: self.playerScore))
+            Task{
+                await self.leaderboardVM.addLeader(playerNameIn: self.playerName, playerHighScore: self.getHighScore())
+            
             print("Current leaderboard: ")
-            print(self.leaderboard.getLeaderBoard())
+            print( await self.leaderboardVM.getLeaders())
+            }
         }
     }
-    
+    /*
     func leaderboardAccess() -> LeaderboardModel{
         return self.leaderboard
     }
+     */
     
    
 }

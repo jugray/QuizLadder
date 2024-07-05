@@ -38,6 +38,10 @@ struct QuizQuestionView: View {
             VStack {
                 ForEach(qData.incorrect_answers.indices) { answer in
                     Button(action: {
+                        if (quizVM.gameDeck.getLoadedQuestions().count - quizVM.gameDeck.getCUrrentCardIndex() == 2){
+                            print("Player is good... getting moar")
+                            quizVM.loadMoar()
+                        }
                         quizVM.gameDeck.scoreQuestion(questionIn: qData, playerAnswer: qData.incorrect_answers[answer])
                         if quizVM.gameDeck.isGameOver(){
                             playerVM.currentPlayer.setLastScore(scoreIn: quizVM.gameDeck.getGameScore())

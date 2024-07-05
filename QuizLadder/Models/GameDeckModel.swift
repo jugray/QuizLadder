@@ -18,10 +18,16 @@ struct GameDeckModel{
         return self.currentCardIndex
     }
     
-    mutating func shuffleDeck(){
+    mutating func newGameDeck(){
         score = 0;
+        currentCardIndex = 0
         gameOver = false;
         passedQuestions.removeAll()
+        loadedQuestions.removeAll()
+    }
+    
+    mutating func shuffleDeck(){
+        
     }
     
     func isGameOver() ->Bool {
@@ -29,7 +35,7 @@ struct GameDeckModel{
     }
     
     mutating func setLoadedQuestions(questionsIn: [QuestionData]){
-        self.loadedQuestions = questionsIn
+        self.loadedQuestions.append(contentsOf: questionsIn)
         shuffleOptions()
         print("\n\nLoaded Questions:")
         print("\(self.loadedQuestions)")
@@ -98,6 +104,7 @@ struct GameDeckModel{
             self.passedQuestions.append(newQuestion)
             print("\nAdding passed question to deck.")
             self.currentCardIndex += 1
+            print("CardIndex: \(self.currentCardIndex)")
         }
      
     }

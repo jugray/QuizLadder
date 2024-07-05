@@ -54,14 +54,17 @@
                         }
                         else {
                             // Normal gameplay, load next card.
-                            if (!quizVM.gameDeck.isGameOver()){
+                            if (!quizVM.gameDeck.isGameOver() && quizVM.gameDeck.getCUrrentCardIndex() < quizVM.gameDeck.getLoadedQuestions().count){
                                 QuizQuestionView(qData: quizVM.gameDeck.getLoadedQuestions()[quizVM.gameDeck.getCUrrentCardIndex()], quizVM: quizVM, playerVM: playerVM, gameOver: $gameOver)
                                     .listRowBackground(Color.clear)
+                                    .onAppear{
+                                        print ("\n Displaying card \(quizVM.gameDeck.getCUrrentCardIndex()) of \(quizVM.gameDeck.getLoadedQuestions().count))")
+                                    }
                             }
                             
                             // Player has goofed, shut it down
-                            else {
-                                
+                            else if (quizVM.gameDeck.getCUrrentCardIndex() == quizVM.gameDeck.getLoadedQuestions().count){
+                                Text("YOU DID IT")
                                //Moved to sheet for now, see below.
                             }
                         }

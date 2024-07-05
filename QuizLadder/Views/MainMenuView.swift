@@ -10,7 +10,7 @@ import SwiftUI
 struct MainMenuView: View {
 
     let backgroundGradient = LinearGradient(
-        colors: [Color("CyberPurple"),Color("SuperPink")],
+        colors: [Color("NuRed"),Color("NeonYellow"),Color("CoLightBlue"),Color("CoMidBlue"),Color("CoDarkBlue")],
         startPoint: .topLeading, endPoint: .bottomTrailing)
     
     @ObservedObject var playerVM : PlayerViewModel = PlayerViewModel()
@@ -28,7 +28,7 @@ struct MainMenuView: View {
                     
                 VStack{
                     Text("QuizLadder")
-                        .foregroundStyle(Color("Cyan"))
+                        .foregroundStyle(Color.nuRed)
                         .font(.system(size: 60, weight: .heavy ,design: .monospaced))
                         .italic()
                     
@@ -44,9 +44,9 @@ struct MainMenuView: View {
                     NavigationLink(destination: GameView(playerVM: playerVM)){
                         Text("New Game")
                             .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
-                            .foregroundStyle(Color("NeonYellow"))
+                            .foregroundStyle(Color(.dirtyWhite))
                             .font(.system(size: 20, weight: .heavy ,design: .monospaced))
-                            .border(Color("NuRed"), width: 2)
+                            .border(Color.coYellow, width: 2)
                             .padding()
                     }
                     
@@ -54,9 +54,9 @@ struct MainMenuView: View {
                     NavigationLink(destination: LeaderboardView(playerVM: playerVM)){
                         Text("LeaderBoard")
                             .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
-                            .foregroundStyle(Color("NeonYellow"))
+                            .foregroundStyle(Color(.dirtyWhite))
                             .font(.system(size: 20, weight: .heavy ,design: .monospaced))
-                            .border(Color("NuRed"), width: 2)
+                            .border(Color.coYellow, width: 2)
                             .padding()
                     }
                     
@@ -65,9 +65,9 @@ struct MainMenuView: View {
                         NavigationLink(destination: SignInView(playerVM: playerVM, quickLogin: $quickLogin, currentUser: $currentUser)){
                             Text("Sign Out")
                                 .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
-                                .foregroundStyle(Color("NeonYellow"))
+                                .foregroundStyle(Color.dirtyWhite)
                                 .font(.system(size: 20, weight: .heavy ,design: .monospaced))
-                                .border(Color("NuRed"), width: 2)
+                                .border(Color.coYellow, width: 2)
                                 .padding()
                             }
                         }
@@ -76,9 +76,9 @@ struct MainMenuView: View {
                         NavigationLink(destination: SignInView(playerVM: playerVM, quickLogin: $quickLogin, currentUser: $currentUser)){
                             Text("Sign In")
                                 .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
-                                .foregroundStyle(Color("NeonYellow"))
+                                .foregroundStyle(Color(.dirtyWhite))
                                 .font(.system(size: 20, weight: .heavy ,design: .monospaced))
-                                .border(Color("NuRed"), width: 2)
+                                .border(Color.coYellow, width: 2)
                                 .padding()
                         }
                     }

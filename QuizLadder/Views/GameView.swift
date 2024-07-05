@@ -19,8 +19,9 @@
         //@State var scoredDeck : ScoredCards  = ScoredCards()
         
         let backgroundGradient = LinearGradient(
-            colors: [Color.indigo, Color.mint],
-            startPoint: .top, endPoint: .bottom)
+            colors: [Color("NuRed"),Color("NeonYellow"),Color("CoLightBlue"),Color("CoMidBlue"),Color("CoDarkBlue")],
+            startPoint: .topLeading, endPoint: .bottomTrailing)
+            
         
         
         var body: some View {
@@ -28,12 +29,15 @@
             ZStack{
                 backgroundGradient
                     .ignoresSafeArea()
+
                 List{
                     //Score and current Question
                     Section {
                         HStack{
-                            Text("Player: \(playerVM.currentPlayer.getEmail())")
+                            Text(playerVM.currentPlayer.getEmail())
                         }
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
                         HStack{
                             Text("Player Score: ")
                                 .font(.title)
@@ -43,6 +47,7 @@
                             
                         }
                         .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
                         
                         
                         //Display progress view if the list is empty
@@ -65,7 +70,7 @@
                                     }
                             }
                             
-                            // Player has goofed, shut it down
+                            //Player reached the end. Unused.
                             else if (quizVM.gameDeck.getCUrrentCardIndex() == quizVM.gameDeck.getLoadedQuestions().count){
                                 Text("YOU DID IT")
                                //Moved to sheet for now, see below.

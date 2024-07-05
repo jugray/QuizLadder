@@ -17,25 +17,35 @@ struct SignInView: View {
     @State var dismissFields = false
     
     let backgroundGradient = LinearGradient(
-        colors: [Color("NeonGreen"),Color("CyberPurple")],
-        startPoint: .topTrailing   , endPoint: .bottomLeading)
+        colors: [Color("CoMidBlue"),Color("CoDarkBlue")],
+        startPoint: .topLeading, endPoint: .bottomTrailing)
     
     var body: some View {
         ZStack {
             backgroundGradient
                 .ignoresSafeArea()
             VStack {
+                Text("QuizLadder")
+                    .foregroundStyle(Color.nuRed)
+                    .font(.system(size: 60, weight: .heavy ,design: .monospaced))
+                    .italic()
                 
                 Section{
                     if currentUser == "" && !dismissFields {
-                        TextField("Email", text: $tempEmail)
-                        SecureField("Password", text: $tempPass)
+                        TextField("\tEmail", text: $tempEmail)
+                            .frame(height: 55)
+                            .background(.dirtyWhite)
+                            
+                        SecureField("\tPassword", text: $tempPass)
+                            .frame(height:55)
+                            .background(.dirtyWhite)
                     }
                     else {
                         Text("Welcome back \(playerVM.currentPlayer.getEmail())")
                     }
                 }
-                .padding()
+                
+                .padding(.horizontal)
                 VStack{
                     //Sign In User
                     Button(action: {
@@ -51,6 +61,7 @@ struct SignInView: View {
                         
                     })
                     .buttonStyle(.bordered)
+                    .tint(.dirtyWhite)
                     
                     //Create new user
                     Button(action: {
@@ -61,6 +72,7 @@ struct SignInView: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                     })
                     .buttonStyle(.bordered)
+                    .tint(.dirtyWhite)
                 
                     if currentUser != ""{
                     //Sign out user
@@ -75,6 +87,7 @@ struct SignInView: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                             })
                             .buttonStyle(.bordered)
+                            .tint(.dirtyWhite)
                         
                     }
                 }

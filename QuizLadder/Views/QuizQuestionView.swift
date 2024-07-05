@@ -10,7 +10,7 @@ import SwiftUI
 struct QuizQuestionView: View {
     
     let backgroundGradient = LinearGradient(
-        colors: [Color.yellow, Color.orange],
+        colors: [Color.dirtyWhite, Color.dirtyWhite],
         startPoint: .topTrailing   , endPoint: .bottomLeading)
     
     var qData : QuestionData
@@ -25,13 +25,20 @@ struct QuizQuestionView: View {
         ZStack{
             backgroundGradient
                 .ignoresSafeArea()
+                .opacity(0.5)
         VStack{
             VStack {
-                Image(systemName: "doc.questionmark.fill")
-                    .imageScale(.large)
-                    .foregroundStyle(.tint)
-                    .padding()
+                HStack{
+                    Image(systemName: "doc.questionmark.fill")
+                        .imageScale(.large)
+                        .foregroundStyle(.tint)
+                         Spacer()
+                    Text("# \(quizVM.gameDeck.getCUrrentCardIndex()+1)")
+                        .font(.system(size: 20))
+                        
+                }
                 Text(qData.question)
+                    .font(.system(size: 24))
                     .frame(maxWidth: .infinity, alignment: .center)
             }
             .padding()
@@ -53,12 +60,14 @@ struct QuizQuestionView: View {
                         
                     })
                     .buttonStyle(.bordered)
+                    .tint(.red)
                 }
     
                 }
             }
             .padding()
         }
+        .cornerRadius(20.0)
         .navigationTitle("Quiz!")
     }
     

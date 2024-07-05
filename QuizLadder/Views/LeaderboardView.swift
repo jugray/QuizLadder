@@ -12,8 +12,8 @@ struct LeaderboardView: View {
     var playerVM : PlayerViewModel
 
     let backgroundGradient = LinearGradient(
-        colors: [Color("NeonGreen"),Color("CyberPurple")],
-        startPoint: .top, endPoint: .bottom)
+        colors: [Color("NuRed"),Color("NeonYellow"),Color("CoLightBlue"),Color("CoMidBlue"),Color("CoDarkBlue")],
+        startPoint: .topLeading, endPoint: .bottomTrailing)
     
     var body: some View {
     

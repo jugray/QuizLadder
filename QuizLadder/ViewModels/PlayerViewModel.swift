@@ -13,6 +13,24 @@ class PlayerViewModel: ObservableObject{
 
     @Published var currentPlayer : PlayerModel = PlayerModel()
     
+    
+    func signOut(){
+        let firebaseAuth = Auth.auth()
+        do {
+          try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+          print("Error signing out: %@", signOutError)
+        }
+        print("\n*** Signing User Out ***")
+        
+        self.currentPlayer.setPlayerID(idIn: "")
+        self.currentPlayer.setEmail(emailIn: "")
+        self.currentPlayer.setLoggedIn(boolIn: false)
+        print("CurrentUID is now: \(self.currentPlayer.getPlayerID())")
+        print("CurrentEmail is now: \(self.currentPlayer.getEmail())")
+        
+    }
+    
     func createUser(emailIn: String, passwordIn: String){
         
          let authResult = try Auth.auth().createUser(withEmail: emailIn, password: passwordIn) { authResult, error in
@@ -42,13 +60,18 @@ class PlayerViewModel: ObservableObject{
             }
             else {
                 if let authResult = authResult{
+                    print("\n*** Firebase SignIn Response ***")
+                    print(authResult)
                     self?.currentPlayer.setPlayerID(idIn: authResult.user.uid)
-                    print("\n*** Firebase SignIn Response***")
+                    self?.currentPlayer.setEmail(emailIn: authResult.user.email ?? "Firebase Nill")
+                    self?.currentPlayer.setLoggedIn(boolIn: true)
                     print("Email: \(String(describing: authResult.user.email))")
                     print("UserUID: \(authResult.user.uid)")
+                    print("\n*** PlayerModel Values Update ***")
                     print("CurrentUID is now: \(self?.currentPlayer.getPlayerID())")
-                    self?.currentPlayer.setLoggedIn(boolIn: true)
+                    print("CurrentEmail is now: \(self?.currentPlayer.getEmail())")
                     
+                
                 }
             }
         }

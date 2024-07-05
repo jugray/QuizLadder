@@ -9,9 +9,12 @@ import SwiftUI
 
 struct SignInView: View {
     
-    @Binding var playerVM : PlayerViewModel
+    var playerVM : PlayerViewModel
     @State var tempEmail = ""
     @State var tempPass = ""
+    @Binding var quickLogin : Bool
+    @Binding var currentUser : String
+    @State var dismissFields = false
     
     let backgroundGradient = LinearGradient(
         colors: [Color("NeonGreen"),Color("CyberPurple")],
@@ -22,18 +25,26 @@ struct SignInView: View {
             backgroundGradient
                 .ignoresSafeArea()
             VStack {
-        
-                Section{
-                    TextField("Email", text: $tempEmail)
-                    SecureField("Password", text: $tempPass)
-                }
-
-                .padding()
                 
+                Section{
+                    if currentUser == "" && !dismissFields {
+                        TextField("Email", text: $tempEmail)
+                        SecureField("Password", text: $tempPass)
+                    }
+                    else {
+                        Text("Welcome back \(playerVM.currentPlayer.getEmail())")
+                    }
+                }
+                .padding()
                 VStack{
-                    //Create new user
+                    //Sign In User
                     Button(action: {
+                        print("Attempting signin...")
                         playerVM.loginUser(emailIn: tempEmail, passwordIn: tempPass)
+                        
+                        dismissFields = true
+                        quickLogin = false
+   
                     }, label: {
                         Text("Sign In")
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -41,15 +52,31 @@ struct SignInView: View {
                     })
                     .buttonStyle(.bordered)
                     
-                    //Sign in existing user
+                    //Create new user
                     Button(action: {
                         playerVM.createUser(emailIn: tempEmail, passwordIn: tempPass)
+                        
                     }, label: {
                         Text("Register")
                             .frame(maxWidth: .infinity, alignment: .center)
                     })
                     .buttonStyle(.bordered)
-                    Spacer()
+                
+                    if currentUser != ""{
+                    //Sign out user
+                    Button(action: {
+                        playerVM.signOut()
+                        dismissFields = false
+                        currentUser = ""
+                       
+                                
+                        }, label: {
+                            Text("Sign Out")
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            })
+                            .buttonStyle(.bordered)
+                        
+                    }
                 }
                 .listRowBackground(Color.clear)
                 .padding()
@@ -61,10 +88,13 @@ struct SignInView: View {
 
 #Preview {
     struct Preview:View{
-        @State var signInVMPreview = PlayerViewModel()
+        var signInVMPreview = PlayerViewModel()
+        @State var currentUserPreview = ""
+        @State var quickLogin = false
+        @State var currentUser = ""
         
         var body : some View{
-            SignInView(playerVM: $signInVMPreview)
+            SignInView(playerVM: signInVMPreview, quickLogin: $quickLogin, currentUser: $currentUser)
         }
     }
     return Preview()

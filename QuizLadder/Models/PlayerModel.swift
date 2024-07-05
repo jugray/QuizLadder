@@ -9,13 +9,13 @@ import Foundation
 
 class PlayerModel :ObservableObject{
     
-    private var playerName : String
-    private var playerScore : Int
-    private var playerHighScore : Int
-    private var leaderboard: LeaderboardModel
-    private var playerID : String
-    private var email = ""
-    private var loggedIn = false;
+    @Published private var playerName : String
+    @Published private var playerScore : Int
+    @Published private var playerHighScore : Int
+    @Published private var leaderboard: LeaderboardModel
+    @Published private var playerID : String
+    @Published private var email = ""
+    @Published private var loggedIn = false;
     
     //Do we only want one...
     //static let shared = PlayerModel()

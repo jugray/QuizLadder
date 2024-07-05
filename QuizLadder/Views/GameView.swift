@@ -32,6 +32,9 @@
                     //Score and current Question
                     Section {
                         HStack{
+                            Text("Player: \(playerVM.currentPlayer.getEmail())")
+                        }
+                        HStack{
                             Text("Player Score: ")
                                 .font(.title)
                             Spacer()

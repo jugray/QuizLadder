@@ -13,7 +13,8 @@ struct MainMenuView: View {
         colors: [Color("NuRed"),Color("NeonYellow"),Color("CoLightBlue"),Color("CoMidBlue"),Color("CoDarkBlue")],
         startPoint: .topLeading, endPoint: .bottomTrailing)
     
-    @ObservedObject var playerVM : PlayerViewModel = PlayerViewModel()
+    @StateObject var playerVM : PlayerViewModel = PlayerViewModel()
+    
     
     //Another hack workaround...
     @State var currentUser : String = ""
@@ -34,7 +35,7 @@ struct MainMenuView: View {
                     
                         if currentUser != ""{
                     HStack{
-                            Text("Welcome back, \(currentUser)")
+                        Text("Welcome back, \(playerVM.currentPlayer.getEmail())")
                                 .padding(.horizontal)
                         
                         Spacer()

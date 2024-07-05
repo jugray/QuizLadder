@@ -10,7 +10,6 @@ import SwiftUI
 struct LeaderboardView: View {
     
     var playerVM : PlayerViewModel
-    @ObservedObject var leaderBoardVM = FirestoreViewModel()
     
     let backgroundGradient = LinearGradient(
         colors: [Color("NuRed"),Color("NeonYellow"),Color("CoLightBlue"),Color("CoMidBlue"),Color("CoDarkBlue")],
@@ -28,7 +27,7 @@ struct LeaderboardView: View {
                 }
                 Section{
                     List{
-                        ForEach(leaderBoardVM.leaders) { leader in
+                        ForEach(playerVM.currentPlayer.getFirestoreVM().getLeaders()) { leader in
                             HStack{
                                 Text("\(leader.getPlayerName())")
                                 Spacer()
@@ -47,7 +46,7 @@ struct LeaderboardView: View {
             .onAppear{
                 print ("*** Loading Leaderboard *** ")
                 Task {
-                    await leaderBoardVM.getLeaders()
+                    await playerVM.currentPlayer.getFirestoreVM().fetchLeaders()
                 }
                 print ("FirebaseDB connected, adding DB data:")
                 

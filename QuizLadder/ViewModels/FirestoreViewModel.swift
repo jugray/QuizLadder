@@ -13,9 +13,13 @@ class FirestoreViewModel : ObservableObject {
     
     let db = Firestore.firestore()
     
-    @Published private(set) var leaders = [LeaderModel]()
+    @Published private var leaders = [LeaderModel]()
     
-    func getLeaders() async{
+    func getLeaders() -> [LeaderModel]{
+        return self.leaders 
+    }
+    
+    func fetchLeaders() async{
         //clear local list fist
         leaders.removeAll()
         

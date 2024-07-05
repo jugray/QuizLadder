@@ -12,7 +12,7 @@ class PlayerModel :ObservableObject{
     @Published private var playerName : String
     @Published private var playerScore : Int
     @Published private var playerHighScore : Int
-    @Published private var leaderboardVM: FirestoreViewModel
+    @Published private var firestoreVM: FirestoreViewModel
     @Published private var playerID : String
     @Published private var email = ""
     @Published private var loggedIn = false;
@@ -24,10 +24,14 @@ class PlayerModel :ObservableObject{
         self.playerName = "Default Player"
         self.playerScore = 0
         self.playerHighScore = 0
-        self.leaderboardVM = FirestoreViewModel()
+        self.firestoreVM = FirestoreViewModel()
         self.playerID = ""
         self.email = ""
         self.loggedIn = false
+    }
+    
+    func getFirestoreVM() -> FirestoreViewModel{
+        return self.firestoreVM
     }
     
    func getloggedIn() -> Bool{
@@ -79,10 +83,10 @@ class PlayerModel :ObservableObject{
             print("Updating high score and leaderboard")
             self.playerHighScore =  self.playerScore
             Task{
-                await self.leaderboardVM.addLeader(playerNameIn: self.playerName, playerHighScore: self.getHighScore())
+                await self.firestoreVM.addLeader(playerNameIn: self.playerName, playerHighScore: self.getHighScore())
             
             print("Current leaderboard: ")
-            print( await self.leaderboardVM.getLeaders())
+            print( await self.firestoreVM.fetchLeaders())
             }
         }
     }

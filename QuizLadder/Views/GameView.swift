@@ -10,7 +10,7 @@
     struct GameView: View {
         
         @ObservedObject var quizVM = QuizViewModel()
-        @ObservedObject var playerVM:PlayerViewModel
+        @ObservedObject var playerVM : PlayerViewModel
         
         //Stupid workaround...fix later
         @State var gameOver = false;

@@ -83,7 +83,7 @@ class PlayerModel :ObservableObject{
         }
     }
     
-    func getLeaderBoard() -> LeaderboardModel{
+    func leaderboardAccess() -> LeaderboardModel{
         return self.leaderboard
     }
     

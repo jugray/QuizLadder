@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LeaderboardView: View {
+    
+    var playerVM : PlayerViewModel
 
     let backgroundGradient = LinearGradient(
         colors: [Color("NeonGreen"),Color("CyberPurple")],
@@ -20,25 +22,32 @@ struct LeaderboardView: View {
 
             VStack {
                 List{
-                    /*
-                    ForEach(PlayerModel.shared.leaderBoardAccess().getLeaderBoard()){ leader in
-                        HStack{
-                            Text("\(PlayerModel.shared.getName())")
-                            Spacer()
-                            Text("\(PlayerModel.shared.getHighScore())")
+                    
+                    ForEach(playerVM.currentPlayer.leaderboardAccess().getLeaderBoard()){ leader in
+                        if leader.name != ""{
+                            HStack{
+                                Text("\(playerVM.currentPlayer.getName())")
+                                Spacer()
+                                Text("\(playerVM.currentPlayer.getHighScore())")
+                            }
                         }
                         
                     }
-                     */
-                    Text("")
+                   
                 }
                 .scrollContentBackground(.hidden)
+               
+            }
+            .onAppear{
+                print ("*** Loading Leaderboard *** ")
+                print(playerVM.currentPlayer.leaderboardAccess().getLeaderBoard())
                 
             }
+            
         }
     }
 }
 
 #Preview {
-    LeaderboardView()
+    LeaderboardView(playerVM: PlayerViewModel())
 }

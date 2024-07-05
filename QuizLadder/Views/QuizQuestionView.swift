@@ -12,9 +12,12 @@ struct QuizQuestionView: View {
     let backgroundGradient = LinearGradient(
         colors: [Color.yellow, Color.orange],
         startPoint: .topTrailing   , endPoint: .bottomLeading)
+    
     var qData : QuestionData
     var quizVM : QuizViewModel
+    var playerVM : PlayerViewModel
     
+    @Binding var gameOver : Bool
     
     //@Binding var scoredDeck : ScoredCards
 
@@ -36,7 +39,10 @@ struct QuizQuestionView: View {
                 ForEach(qData.incorrect_answers.indices) { answer in
                     Button(action: {
                         quizVM.gameDeck.scoreQuestion(questionIn: qData, playerAnswer: qData.incorrect_answers[answer])
-                        
+                        if quizVM.gameDeck.isGameOver(){
+                            playerVM.currentPlayer.setLastScore(scoreIn: quizVM.gameDeck.getGameScore())
+                            self.gameOver = true
+                        }
                     }, label: {
                         Text(qData.incorrect_answers[answer])
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -55,23 +61,21 @@ struct QuizQuestionView: View {
 }
 
 #Preview {
-    //Create struct to use preview with @State wrapper to fix error
-    struct Preview:View {
-        //@State var previewDeck = ScoredCards()
-        var previewQuizVM = QuizViewModel()
+    
+    struct Preview:View{
         
-        var body : some View {
-            NavigationStack{
-                QuizQuestionView(qData: QuestionData(
-                    question: "Question Text",
-                    difficulty: "Difficulty",
-                    correct_answer: "Question Answer",
-                    incorrect_answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"]),
-                                 quizVM: previewQuizVM)
-            }
+        @State var gameOver : Bool = false
+        
+        var body: some View{
+            
+                           QuizQuestionView(qData: QuestionData(
+                               question: "Question Text",
+                               difficulty: "Difficulty",
+                               correct_answer: "Question Answer",
+                               incorrect_answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"]),
+                                            quizVM: QuizViewModel(), playerVM: PlayerViewModel(), gameOver: $gameOver)
         }
     }
-   
-        return Preview()
-    }
+    return Preview()
+}
 

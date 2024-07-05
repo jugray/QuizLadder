@@ -11,12 +11,18 @@ class QuizViewModel : ObservableObject{
 
     @Published private(set) var questionSet = [QuestionData]()
     @Published var gameDeck : GameDeckModel = GameDeckModel()
-    
+
     
     //API URL
     private let url = "https://opentdb.com/api.php?amount=10&type=multiple"
     
 
+    func newGame(){
+        self.gameDeck.shuffleDeck()
+        self.getQuestions()
+        print("New game called")
+    }
+    
     func getQuestions() {
         if let url = URL(string: url){
             URLSession

@@ -40,7 +40,7 @@ struct MainMenuView: View {
                     }
                     
                     //Check Scores
-                    NavigationLink(destination: LeaderboardView()){
+                    NavigationLink(destination: LeaderboardView(playerVM: playerVM)){
                         Text("LeaderBoard")
                             .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
                             .foregroundStyle(Color("NeonYellow"))

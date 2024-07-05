@@ -8,12 +8,25 @@
 import Foundation
 
 struct GameDeckModel{
-    var loadedQuestions: [QuestionData] = []
-    var passedQuestions: [QuestionData] = []
-    var currentCard = 0
-    var score = 0
-    var gameOver = false
+    private var loadedQuestions: [QuestionData] = []
+    private var passedQuestions: [QuestionData] = []
+    private var currentCardIndex = 0
+    private var score = 0
+    private var gameOver = false
     
+    func getCUrrentCardIndex() -> Int{
+        return self.currentCardIndex
+    }
+    
+    mutating func shuffleDeck(){
+        score = 0;
+        gameOver = false;
+        passedQuestions.removeAll()
+    }
+    
+    func isGameOver() ->Bool {
+        return self.gameOver    
+    }
     
     mutating func setLoadedQuestions(questionsIn: [QuestionData]){
         self.loadedQuestions = questionsIn
@@ -22,19 +35,29 @@ struct GameDeckModel{
         print("\(self.loadedQuestions)")
     }
     
-     func getLoadedQuestions() -> [QuestionData]{
+    
+    func getLoadedQuestions() -> [QuestionData]{
         return self.loadedQuestions
     }
+    
+    func getPassedQuestions() -> [QuestionData]{
+        return self.passedQuestions
+    }
+    
     
     mutating func shuffleOptions(){
         for questions in loadedQuestions.indices {
             loadedQuestions[questions].setQuestions()
         }
     }
-    
-    
+    /*
     func getCurrentCard() -> QuestionData{
         return loadedQuestions[currentCard]
+    }
+     */
+    
+    func getGameScore() -> Int{
+        return self.score
     }
     
     mutating func scoreQuestion(questionIn: QuestionData, playerAnswer: String) {
@@ -52,9 +75,7 @@ struct GameDeckModel{
         else {
             self.gameOver = true
             print("\n\n *** GAME OVER *** \nwomp womp...")
-            //PlayerModel.shared.setLastScore(scoreIn: score)
-            //print("\nPlayer score: \(PlayerModel.shared.getLastScore())")
-            //print("\nPlayer's highscore: \(PlayerModel.shared.getHighScore())")
+          
         }
         
         if (correct){
@@ -76,7 +97,7 @@ struct GameDeckModel{
             
             self.passedQuestions.append(newQuestion)
             print("\nAdding passed question to deck.")
-            self.currentCard += 1
+            self.currentCardIndex += 1
         }
      
     }

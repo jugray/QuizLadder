@@ -12,6 +12,9 @@
         @ObservedObject var quizVM = QuizViewModel()
         @ObservedObject var playerVM:PlayerViewModel
         
+        //Stupid workaround...fix later
+        @State var gameOver = false;
+        
         //deck object contains passed questions, may just move all "game session" data here
         //@State var scoredDeck : ScoredCards  = ScoredCards()
         
@@ -32,7 +35,7 @@
                             Text("Player Score: ")
                                 .font(.title)
                             Spacer()
-                            Text("\(quizVM.gameDeck.score)")
+                            Text("\(quizVM.gameDeck.getGameScore())")
                                 .font(.title)
                             
                         }
@@ -51,19 +54,20 @@
                         }
                         else {
                             // Normal gameplay, load next card.
-                            if (!quizVM.gameDeck.gameOver){
-                                QuizQuestionView(qData: quizVM.gameDeck.getLoadedQuestions()[quizVM.gameDeck.currentCard], quizVM: quizVM)
+                            if (!quizVM.gameDeck.isGameOver()){
+                                QuizQuestionView(qData: quizVM.gameDeck.getLoadedQuestions()[quizVM.gameDeck.getCUrrentCardIndex()], quizVM: quizVM, playerVM: playerVM, gameOver: $gameOver)
                                     .listRowBackground(Color.clear)
                             }
                             
                             // Player has goofed, shut it down
                             else {
+                                
                                //Moved to sheet for now, see below.
                             }
                         }
                     }
                         //Loop through completed card stack and display each card
-                        ForEach(quizVM.gameDeck.passedQuestions.reversed()) { question in
+                        ForEach(quizVM.gameDeck.getPassedQuestions().reversed()) { question in
                                 //QuizQuestionView(qData: question)
                             CompletedQuizQuestionView(questionText: question.question, questionAnswer: question.correct_answer)
                                 .listRowBackground(Color.clear)
@@ -73,20 +77,24 @@
                         }
                                     
                 }
-                .sheet(isPresented:$quizVM.gameDeck.gameOver) {
-                                    GameOverView(questionAnswer: quizVM.gameDeck.getLoadedQuestions()[quizVM.gameDeck.currentCard].correct_answer ,
-                                                 question: quizVM.gameDeck.getLoadedQuestions()[quizVM.gameDeck.currentCard].question, score: quizVM.gameDeck.score)
-                                    
+                .sheet(isPresented:$gameOver, onDismiss: {
+                    print("*** Ending Game ***")
+                    quizVM.newGame()
+                }) {
+                                    GameOverView(questionAnswer: quizVM.gameDeck.getLoadedQuestions()[quizVM.gameDeck.getCUrrentCardIndex()].correct_answer ,
+                                                 question: quizVM.gameDeck.getLoadedQuestions()[quizVM.gameDeck.getCUrrentCardIndex()].question, score: quizVM.gameDeck.getGameScore())
                                     }
                 
                 .scrollContentBackground(.hidden)
                 //.listRowSpacing(0)
                 .listSectionSpacing(25)
                 .refreshable {
-                    quizVM.getQuestions()
+                    quizVM.newGame()
                 }
                 .onAppear{
-                    quizVM.getQuestions()
+                    print("*** Starting new Quiz Game ***")
+                    print(quizVM.gameDeck.getPassedQuestions())
+                    quizVM.newGame()
                     
                 }
             }
@@ -94,13 +102,5 @@
     }
 
     #Preview {
-        struct Preview:View {
-            
-            @ObservedObject var playerVM:PlayerViewModel = PlayerViewModel()
-        
-            var body: some View {
-                GameView(playerVM:playerVM)
-            }
-        }
-        return Preview()
+                GameView(playerVM:PlayerViewModel())
     }

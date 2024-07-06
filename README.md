@@ -10,15 +10,15 @@ The application utilizes Goolge Firebase for user authentication, and Firestore 
 
 ## Main Menu
 
-![image](Main.png)
+![image](./Images/Main.png)
 ## Sign In and Registration
-![image](SignIn.png)
-![image](Register.png)
+![image](./Images/SignIn.png)
+![image](./Images/Register.png)
 
 ## Leaderboard
-![image](LeaderBoard.png)
+![image](./Images/LeaderBoard.png)
 
 ## GameBoard
-![image](GameBoard.png)
-![image](GameOver.png)
-![image](Google.png)
+![image](./Images/GameBoard.png)
+![image](./Images/GameOver.png)
+![image](./Images/Google.png)

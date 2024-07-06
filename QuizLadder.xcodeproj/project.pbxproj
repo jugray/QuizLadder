@@ -113,7 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				0CDF2A532C39FA73003A3C3B /* README.md */,
-				0CDF2A542C3A0054003A3C3B /* Images */,
+				0CDF2A812C3A0FF9003A3C3B /* Images */,
 				0C88C20E2C31C7DC0061EEEC /* QuizLadder */,
 				0C88C20D2C31C7DC0061EEEC /* Products */,
 				0C355A2D2C3730FB00699DDB /* Frameworks */,
@@ -179,18 +179,18 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		0CDF2A542C3A0054003A3C3B /* Images */ = {
+		0CDF2A812C3A0FF9003A3C3B /* Images */ = {
 			isa = PBXGroup;
 			children = (
 				0CDF2A7E2C3A0E00003A3C3B /* Register.png */,
 				0CDF2A7D2C3A0DFF003A3C3B /* SignIn.png */,
 				0CDF2A7B2C3A0B33003A3C3B /* Google.png */,
 				0CDF2A732C3A09E3003A3C3B /* GameOver.png */,
+				0CDF2A712C3A098B003A3C3B /* Main.png */,
 				0CDF2A692C3A0845003A3C3B /* GameBoard.png */,
 				0CDF2A752C3A0A3D003A3C3B /* LeaderBoard.png */,
-				0CDF2A712C3A098B003A3C3B /* Main.png */,
 			);
-			name = Images;
+			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

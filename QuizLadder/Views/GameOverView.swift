@@ -10,7 +10,7 @@ import SwiftUI
 struct GameOverView: View {
     
     let backgroundGradient = LinearGradient(
-        colors: [Color.pink, Color.orange],
+        colors: [Color.coRed,Color.nuRed],
         startPoint: .topTrailing   , endPoint: .bottomLeading)
     
     var questionAnswer : String
@@ -22,15 +22,36 @@ struct GameOverView: View {
             backgroundGradient
                 .ignoresSafeArea()
             VStack {
-                Text("Game OVER!")
+                Text("YOU FELL!")
+                    .foregroundStyle(Color.neonYellow)
+                    .font(.system(size: 60, weight: .heavy))
+                    .italic()
                     .padding()
                 
-                    //LMGTFY
+                
                 Text("Player Score: \(score)")
+                    .foregroundStyle(Color.dirtyWhite)
+                    .font(.system(size:30))
                     .padding()
-                Text("Correct Answer: ")
-                Link(questionAnswer, destination: URL(string: "https://www.google.com/search?q=" + question)!)
-                    .buttonStyle(BorderlessButtonStyle())
+                
+                
+                Section{
+                    //LMGTFY
+                    Text("Would you like to know more?")
+                        .italic()
+                        .padding()
+                    HStack{
+                        Text("Tap Here -> ")
+                            .foregroundStyle(Color.dirtyWhite)
+                            .italic()
+                        Link(questionAnswer, destination: URL(string: "https://www.google.com/search?q=" + question)!)
+                            .font(.system(size: 24))
+                            .buttonStyle(BorderlessButtonStyle())
+                            .foregroundColor(.neonYellow)
+
+                    }
+                    .font(.system(size:20))
+                }
             }
         }
     }

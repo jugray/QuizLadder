@@ -32,7 +32,8 @@ import Foundation
     }
         
     mutating func scrubHTML(){
-        var dontLike: [(String, String)] = [("&quot;","\""),("&#039;","\'"),("&amp", "&")]
+        //Array of unwanted HTML characters in JSON response.
+        let dontLike: [(String, String)] = [("&quot;","\""),("&#039;","\'"),("&amp;", "&")]
         
         for htmlStrings in dontLike{
             self.question = self.question.replacingOccurrences(of: htmlStrings.0, with: htmlStrings.1)

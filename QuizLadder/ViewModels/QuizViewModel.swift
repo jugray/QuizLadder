@@ -12,7 +12,6 @@ class QuizViewModel : ObservableObject{
     //@Published private(set) var questionSet = [QuestionData]()
     @Published var gameDeck : GameDeckModel = GameDeckModel()
     
-    
     /*API URL
      
      More Info: https://opentdb.com/api_config.php
@@ -20,19 +19,36 @@ class QuizViewModel : ObservableObject{
      
     */
     
-    private let url = "https://opentdb.com/api.php?amount=50&category=9&type=multiple"
+    private var url = ""
     
     //Get new deck and reset game conditions, lets play!
     func newGame(){
         self.gameDeck.newGameDeck()
+        self.loadMoar(passedQuestions: 0)
         Task {
-            await self.getQuestions()
+            //await self.getQuestions()
+            //self.lo
         }
         print("*** New game called ***")
     }
     
-    //Player is good, we need more questions!
-    func loadMoar(){
+    //Player is good, we need moar questions!
+    func loadMoar(passedQuestions: Int){
+        print("Loading moar...")
+        print("Passed Questions Count: \(passedQuestions)")
+        switch passedQuestions {
+            case 0:
+                print("*** Setting easy URL ***")
+                self.url = "https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple"
+            case 3:
+                print("*** Setting med URL ***")
+                self.url = "https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple"
+            default:
+                print("*** Setting bonus URL ***")
+                self.url = "https://opentdb.com/api.php?amount=10&type=multiple"
+
+        }
+
         /*Shuffle does not appear to work correctly on new additions?
          Unlikley to make this far with 50 questions, but it should be looked into.
          

@@ -26,10 +26,7 @@ struct GameDeckModel{
         loadedQuestions.removeAll()
     }
     
-    mutating func shuffleDeck(){
-        
-    }
-    
+ 
     func isGameOver() ->Bool {
         return self.gameOver    
     }
@@ -52,16 +49,14 @@ struct GameDeckModel{
     
     
     mutating func shuffleOptions(){
+        print("Correcting answers for questions > index : \(self.getCUrrentCardIndex())")
         for questions in loadedQuestions.indices {
-            loadedQuestions[questions].setQuestions()
+            if questions >= self.getCUrrentCardIndex(){
+                loadedQuestions[questions].setQuestions()
+            }
         }
     }
-    /*
-    func getCurrentCard() -> QuestionData{
-        return loadedQuestions[currentCard]
-    }
-     */
-    
+   
     func getGameScore() -> Int{
         return self.score
     }
@@ -89,9 +84,9 @@ struct GameDeckModel{
                 case "easy":
                     score += 2
                 case "medium":
-                    score += 3
-                case "hard":
                     score += 5
+                case "hard":
+                    score += 8
                 default:
                     score += 0
             }
@@ -105,6 +100,7 @@ struct GameDeckModel{
             print("\nAdding passed question to deck.")
             self.currentCardIndex += 1
             print("CardIndex: \(self.currentCardIndex)")
+            print("Cards remaining in deck: \(self.getLoadedQuestions().count - self.getCUrrentCardIndex())")
         }
      
     }

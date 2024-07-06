@@ -24,7 +24,7 @@ import Foundation
         
     
     mutating func setQuestions(){
-
+        
         incorrect_answers.append(correct_answer)
         incorrect_answers.shuffle()
         scrubHTML()

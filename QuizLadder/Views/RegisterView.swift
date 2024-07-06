@@ -9,8 +9,8 @@ import SwiftUI
 
 struct RegisterView: View {
     @ObservedObject var playerVM : PlayerViewModel
-    @Binding var tempEmail : String
-    @Binding var tempPass : String
+    @State var tempEmail : String = ""
+    @State var tempPass : String = ""
     @State var tempUserName : String = ""
     @State var dismissFields = false
     
@@ -90,9 +90,7 @@ struct RegisterView: View {
             @State var tempEmailPreview = ""
             @State var tempPassPreview = ""
             
-            
-            
-            RegisterView(playerVM: PlayerViewModel(), tempEmail: $tempEmailPreview, tempPass: $tempPassPreview)
+            RegisterView(playerVM: PlayerViewModel(), tempEmail: tempEmailPreview, tempPass: tempPassPreview)
         }
     }
     return Preview()

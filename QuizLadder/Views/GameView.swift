@@ -22,10 +22,8 @@
             colors: [Color.green,Color.mint],
             startPoint: .top, endPoint: .bottomTrailing)
             
-        
-        
         var body: some View {
-            
+    
             ZStack{
                 backgroundGradient
                     .ignoresSafeArea()
@@ -48,7 +46,7 @@
                         .listRowBackground(Color.clear)
                         .listRowSeparator(.hidden)
                         HStack{
-                            Text("Current Score: ")
+                            Text("Score: ")
                                 .font(.system(size: 24,weight: .medium))
                                 .foregroundColor(.neonYellow)
 
@@ -56,9 +54,7 @@
                             Text("\(quizVM.gameDeck.getGameScore())")
                                 .font(.system(size: 28,weight: .bold))
                                 .foregroundColor(.neonYellow)
-                            
 
-                            
                         }
                         .listRowBackground(Color.clear)
                         .listRowSeparator(.hidden)
@@ -84,12 +80,6 @@
                                         print ("\n Displaying card \(quizVM.gameDeck.getCUrrentCardIndex()) of \(quizVM.gameDeck.getLoadedQuestions().count))")
                                     }
                             }
-                            
-                            //Player reached the end. Unused.
-                            else if (quizVM.gameDeck.getCUrrentCardIndex() == quizVM.gameDeck.getLoadedQuestions().count){
-                                Text("YOU DID IT")
-                               //Moved to sheet for now, see below.
-                            }
                         }
                     }
                         //Loop through completed card stack and display each card
@@ -100,6 +90,8 @@
                         }
                         .onAppear{
                             print("Displaying completed cards!")
+                            
+                            
                         }
                                     
                 }
@@ -123,7 +115,7 @@
                     quizVM.newGame()
                     
                 }
-            }.navigationTitle("Quiz")
+            }
         }
     }
 

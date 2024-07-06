@@ -30,6 +30,16 @@ class PlayerModel :ObservableObject{
         self.loggedIn = false
     }
     
+    
+    func clearUserData(){
+        self.playerName = "Default Player"
+        self.playerScore = 0
+        self.playerHighScore = 0
+        self.firestoreVM = FirestoreViewModel()
+        self.playerID = ""
+        self.email = ""
+        self.loggedIn = false    }
+    
     func getFirestoreVM() -> FirestoreViewModel{
         return self.firestoreVM
     }

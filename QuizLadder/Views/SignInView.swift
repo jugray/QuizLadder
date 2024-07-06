@@ -33,7 +33,7 @@ struct SignInView: View {
                             .padding()
                         
                     Section{
-                        if currentUser == "" && !dismissFields {
+                        if dismissFields == false {
                             TextField("\tEmail", text: $tempEmail)
                                 .frame(height: 55)
                                 .background(.dirtyWhite)
@@ -54,7 +54,7 @@ struct SignInView: View {
                     .padding(.horizontal)
                     VStack{
                         if dismissFields != true{
-                            //Sign In User
+                        //Sign In User
                         Button(action: {
                             print("Attempting signin...")
                             playerVM.loginUser(emailIn: tempEmail, passwordIn: tempPass)
@@ -76,7 +76,7 @@ struct SignInView: View {
                             
                             //Create new user
                             NavigationLink {
-                                RegisterView(playerVM: playerVM, tempEmail: $tempEmail, tempPass: $tempPass)
+                                RegisterView(playerVM: playerVM, tempEmail: tempEmail, tempPass: tempPass)
                             } label: {
                                 Text("Reigster")
                                     .frame(maxWidth: 300, alignment: .center)
@@ -102,7 +102,7 @@ struct SignInView: View {
                             .buttonStyle(.bordered)
                             .background(.dirtyWhite)
                             .foregroundColor(.coYellow)
-
+                            .cornerRadius(12)
                         }
                     }
                     .listRowBackground(Color.clear)

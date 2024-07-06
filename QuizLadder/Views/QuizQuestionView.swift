@@ -50,7 +50,7 @@ struct QuizQuestionView: View {
                     Button(action: {
                         if (quizVM.gameDeck.getLoadedQuestions().count - quizVM.gameDeck.getCUrrentCardIndex() == 2){
                             print("Player is good... getting moar")
-                            quizVM.loadMoar()
+                            quizVM.loadMoar(passedQuestions: quizVM.gameDeck.getCUrrentCardIndex())
                         }
                         quizVM.gameDeck.scoreQuestion(questionIn: qData, playerAnswer: qData.incorrect_answers[answer])
                         if quizVM.gameDeck.isGameOver(){
@@ -71,7 +71,6 @@ struct QuizQuestionView: View {
             .padding()
         }
         .cornerRadius(20.0)
-        .navigationTitle("Quiz!")
     }
     
 }

@@ -10,8 +10,8 @@ import SwiftUI
 struct MainMenuView: View {
 
     let backgroundGradient = LinearGradient(
-        colors: [Color("NuRed"),Color("NeonYellow"),Color("CoLightBlue"),Color("CoMidBlue"),Color("CoDarkBlue")],
-        startPoint: .topLeading, endPoint: .bottomTrailing)
+        colors: [Color.green,Color.mint],
+        startPoint: .top, endPoint: .bottomTrailing)
     
     @StateObject var playerVM : PlayerViewModel = PlayerViewModel()
     
@@ -28,14 +28,15 @@ struct MainMenuView: View {
                     
                 VStack{
                     Text("QuizLadder")
-                        .foregroundStyle(Color.nuRed)
+                        .foregroundStyle(Color.coDarkBlue)
                         .font(.system(size: 60, weight: .heavy ,design: .monospaced))
                         .italic()
                     
                         if currentUser != ""{
                     HStack{
                         Text("Watch your step, \(playerVM.currentPlayer.getName())!")
-                            .font(.system(size: 12))
+                            .foregroundColor(.neonYellow)
+                            .font(.system(size: 18))
                                 .padding(.horizontal)
                                 .italic()   
                         
@@ -45,20 +46,22 @@ struct MainMenuView: View {
                     //Play Game
                     NavigationLink(destination: GameView(playerVM: playerVM)){
                         Text("New Game")
-                            .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
-                            .foregroundStyle(Color(.dirtyWhite))
+                            .frame(maxWidth: 300, maxHeight: 50, alignment: .center)
+                            .foregroundStyle(Color(.coYellow))
                             .font(.system(size: 20, weight: .heavy ,design: .monospaced))
-                            .border(Color.coYellow, width: 2)
+                            .background(Color.dirtyWhite)
+                            .cornerRadius(12)
                             .padding()
                     }
                     
                     //Check Scores
                     NavigationLink(destination: LeaderboardView()){
                         Text("LeaderBoard")
-                            .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
-                            .foregroundStyle(Color(.dirtyWhite))
+                            .frame(maxWidth: 300, maxHeight: 50, alignment: .center)
+                            .foregroundStyle(Color(.coYellow))
                             .font(.system(size: 20, weight: .heavy ,design: .monospaced))
-                            .border(Color.coYellow, width: 2)
+                            .background(Color.dirtyWhite)
+                            .cornerRadius(12)
                             .padding()
                     }
                     
@@ -66,10 +69,11 @@ struct MainMenuView: View {
                     if playerVM.currentPlayer.getloggedIn() == true{
                         NavigationLink(destination: SignInView(playerVM: playerVM, quickLogin: $quickLogin, currentUser: $currentUser)){
                             Text("Sign Out")
-                                .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
-                                .foregroundStyle(Color.dirtyWhite)
+                                .frame(maxWidth: 300, maxHeight: 50, alignment: .center)
+                                .foregroundStyle(Color(.coYellow))
                                 .font(.system(size: 20, weight: .heavy ,design: .monospaced))
-                                .border(Color.coYellow, width: 2)
+                                .background(Color.dirtyWhite)
+                                .cornerRadius(12)
                                 .padding()
                             }
                         }
@@ -77,10 +81,11 @@ struct MainMenuView: View {
                     else{
                         NavigationLink(destination: SignInView(playerVM: playerVM, quickLogin: $quickLogin, currentUser: $currentUser)){
                             Text("Sign In")
-                                .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
-                                .foregroundStyle(Color(.dirtyWhite))
+                                .frame(maxWidth: 300, maxHeight: 50, alignment: .center)
+                                .foregroundStyle(Color(.coYellow))
                                 .font(.system(size: 20, weight: .heavy ,design: .monospaced))
-                                .border(Color.coYellow, width: 2)
+                                .background(Color.dirtyWhite)
+                                .cornerRadius(12)
                                 .padding()
                         }
                     }

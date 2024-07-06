@@ -15,8 +15,8 @@ struct RegisterView: View {
     @State var dismissFields = false
     
     let backgroundGradient = LinearGradient(
-        colors: [Color("CoMidBlue"),Color("CoDarkBlue")],
-        startPoint: .topLeading, endPoint: .bottomTrailing)
+        colors: [Color.green,Color.mint],
+        startPoint: .top, endPoint: .bottomTrailing)
     
     var body: some View {
         ZStack {
@@ -24,7 +24,7 @@ struct RegisterView: View {
                 .ignoresSafeArea()
             VStack(alignment: .leading) {
                 Text("Register")
-                    .foregroundStyle(Color.nuRed)
+                    .foregroundStyle(Color.coDarkBlue)
                     .font(.system(size: 30, weight: .heavy))
                     .italic()
                     .padding()
@@ -34,20 +34,22 @@ struct RegisterView: View {
                         TextField("\tUserName", text: $tempUserName)
                             .frame(height: 55)
                             .background(.dirtyWhite)
-                            .cornerRadius(10)
+                            .cornerRadius(8)
                         
                         TextField("\tEmail", text: $tempEmail)
                             .frame(height: 55)
                             .background(.dirtyWhite)
-                            .cornerRadius(10)
+                            .cornerRadius(8)
                         
                         SecureField("\tPassword", text: $tempPass)
                             .frame(height:55)
                             .background(.dirtyWhite)
-                            .cornerRadius(10)
+                            .cornerRadius(8)
                     }
                     else {
                         Text("Happy Climbing! \(playerVM.currentPlayer.getEmail())")
+                            .foregroundColor(.coYellow)
+
                     }
                 }
                 
@@ -67,7 +69,10 @@ struct RegisterView: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                     })
                     .buttonStyle(.bordered)
-                    .tint(.dirtyWhite)
+                    .background(.dirtyWhite)
+                    .foregroundColor(.coYellow)
+                    .cornerRadius(12)
+                    .padding(.horizontal)
                     
                 }
                 .listRowBackground(Color.clear)

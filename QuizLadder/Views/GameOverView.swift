@@ -11,7 +11,7 @@ struct GameOverView: View {
     
     let backgroundGradient = LinearGradient(
         colors: [Color.coRed,Color.nuRed],
-        startPoint: .topTrailing   , endPoint: .bottomLeading)
+        startPoint: .bottomTrailing   , endPoint: .top)
     
     var questionAnswer : String
     var question : String
@@ -38,6 +38,8 @@ struct GameOverView: View {
                 Section{
                     //LMGTFY
                     Text("Would you like to know more?")
+                        .font(.system(size: 20))
+                        .foregroundColor(.green)
                         .italic()
                         .padding()
                     HStack{

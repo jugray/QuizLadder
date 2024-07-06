@@ -17,8 +17,8 @@ struct SignInView: View {
     @State var dismissFields = false
     
     let backgroundGradient = LinearGradient(
-        colors: [Color("CoMidBlue"),Color("CoDarkBlue")],
-        startPoint: .topLeading, endPoint: .bottomTrailing)
+        colors: [Color.green,Color.mint],
+        startPoint: .top, endPoint: .bottomTrailing)
     
     var body: some View {
             ZStack {
@@ -27,7 +27,7 @@ struct SignInView: View {
                 
                     VStack(alignment: .leading) {
                         Text("Sign In")
-                            .foregroundStyle(Color.nuRed)
+                            .foregroundStyle(Color.coDarkBlue)
                             .font(.system(size: 30, weight: .heavy))
                             .italic()
                             .padding()
@@ -37,13 +37,17 @@ struct SignInView: View {
                             TextField("\tEmail", text: $tempEmail)
                                 .frame(height: 55)
                                 .background(.dirtyWhite)
+                                .cornerRadius(8)
                             
                             SecureField("\tPassword", text: $tempPass)
                                 .frame(height:55)
                                 .background(.dirtyWhite)
+                                .cornerRadius(8)
                         }
                         else {
                             Text("Signed in: \(playerVM.currentPlayer.getName())")
+                                .foregroundColor(.coYellow)
+
                         }
                     }
                     
@@ -60,21 +64,27 @@ struct SignInView: View {
                             
                         }, label: {
                             Text("Sign In")
-                                .frame(maxWidth: .infinity, alignment: .center)
+                                .frame(maxWidth: 300, alignment: .center)
                             
                         })
                         .buttonStyle(.bordered)
-                        .tint(.dirtyWhite)
+                        .background(.dirtyWhite)
+                        .foregroundColor(.coYellow)
+                        .cornerRadius(12)
+                        .padding(.horizontal)
+
                             
                             //Create new user
                             NavigationLink {
                                 RegisterView(playerVM: playerVM, tempEmail: $tempEmail, tempPass: $tempPass)
                             } label: {
                                 Text("Reigster")
-                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .frame(maxWidth: 300, alignment: .center)
                             }
                             .buttonStyle(.bordered)
-                            .tint(.dirtyWhite)
+                            .background(.dirtyWhite)
+                            .foregroundColor(.coYellow)
+                            .cornerRadius(12)
                         }
                         
                         if dismissFields == true{
@@ -87,11 +97,12 @@ struct SignInView: View {
                                 
                             }, label: {
                                 Text("Sign Out")
-                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .frame(maxWidth: 300, alignment: .center)
                             })
                             .buttonStyle(.bordered)
-                            .tint(.dirtyWhite)
-                            
+                            .background(.dirtyWhite)
+                            .foregroundColor(.coYellow)
+
                         }
                     }
                     .listRowBackground(Color.clear)

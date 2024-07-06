@@ -19,8 +19,8 @@
         //@State var scoredDeck : ScoredCards  = ScoredCards()
         
         let backgroundGradient = LinearGradient(
-            colors: [Color("NuRed"),Color("NeonYellow"),Color("CoLightBlue"),Color("CoMidBlue"),Color("CoDarkBlue")],
-            startPoint: .topLeading, endPoint: .bottomTrailing)
+            colors: [Color.green,Color.mint],
+            startPoint: .top, endPoint: .bottomTrailing)
             
         
         
@@ -35,17 +35,29 @@
                     Section {
                         HStack{
                             Text(playerVM.currentPlayer.getName())
+                                .font(.system(size: 24,weight: .medium))
+                                .foregroundColor(.neonYellow)
+                                .italic()
+
                             Spacer()
                             Text("Session Best: \(playerVM.currentPlayer.getHighScore())")
+                                .font(.system(size: 20,weight: .medium))
+                                .foregroundColor(.coMidBlue)
+                                .italic()
                         }
                         .listRowBackground(Color.clear)
                         .listRowSeparator(.hidden)
                         HStack{
                             Text("Current Score: ")
-                                .font(.title)
+                                .font(.system(size: 24,weight: .medium))
+                                .foregroundColor(.neonYellow)
+
                             Spacer()
                             Text("\(quizVM.gameDeck.getGameScore())")
-                                .font(.title)
+                                .font(.system(size: 28,weight: .bold))
+                                .foregroundColor(.neonYellow)
+                            
+
                             
                         }
                         .listRowBackground(Color.clear)

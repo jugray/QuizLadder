@@ -21,7 +21,7 @@ struct CompletedQuizQuestionView: View {
         ZStack{
             backgroundGradient
                 .ignoresSafeArea()
-                .opacity(0.5)
+                .opacity(0.8)
             VStack{
                 VStack{
                     Text(questionText)

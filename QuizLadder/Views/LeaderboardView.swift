@@ -12,8 +12,8 @@ struct LeaderboardView: View {
     @StateObject var fireStoreVM :FirestoreViewModel = FirestoreViewModel()
     
     let backgroundGradient = LinearGradient(
-        colors: [Color("NuRed"),Color("NeonYellow"),Color("CoLightBlue"),Color("CoMidBlue"),Color("CoDarkBlue")],
-        startPoint: .topLeading, endPoint: .bottomTrailing)
+        colors: [Color.green,Color.mint],
+        startPoint: .top, endPoint: .bottomTrailing)
     
     var body: some View {
         
@@ -22,7 +22,7 @@ struct LeaderboardView: View {
             
             VStack {
                 Text("Top Rungs")
-                    .foregroundStyle(Color.nuRed)
+                    .foregroundStyle(Color.coDarkBlue)
                     .font(.system(size: 40, weight: .heavy))
                     .italic()
                 List{
@@ -43,11 +43,11 @@ struct LeaderboardView: View {
                         }
                     }
                 }
-                
+                .cornerRadius(12)
                 .opacity(0.8)
                 .padding()
             }
-            .offset(y:100)
+            .offset(y:80)
             .onAppear{
                 print ("*** Loading Leaderboard *** ")
                 Task {

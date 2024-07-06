@@ -28,7 +28,6 @@
 		0C88C2242C31DBC20061EEEC /* QuestionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C88C2232C31DBC20061EEEC /* QuestionData.swift */; };
 		0C88C2272C31F0DD0061EEEC /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C88C2262C31F0DD0061EEEC /* QuizViewModel.swift */; };
 		0C88C2292C33A94E0061EEEC /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C88C2282C33A94E0061EEEC /* QuestionModel.swift */; };
-		0C88C22D2C33AE650061EEEC /* ScoredCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C88C22C2C33AE650061EEEC /* ScoredCards.swift */; };
 		0C88C2312C34F96C0061EEEC /* GameDeckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C88C2302C34F96C0061EEEC /* GameDeckModel.swift */; };
 		0C88C2352C35BCE60061EEEC /* CompletedQuizQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C88C2342C35BCE60061EEEC /* CompletedQuizQuestionView.swift */; };
 		0C88C2372C35C3100061EEEC /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C88C2362C35C3100061EEEC /* GameOverView.swift */; };
@@ -53,7 +52,6 @@
 		0C88C2232C31DBC20061EEEC /* QuestionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionData.swift; sourceTree = "<group>"; };
 		0C88C2262C31F0DD0061EEEC /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
 		0C88C2282C33A94E0061EEEC /* QuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionModel.swift; sourceTree = "<group>"; };
-		0C88C22C2C33AE650061EEEC /* ScoredCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoredCards.swift; sourceTree = "<group>"; };
 		0C88C2302C34F96C0061EEEC /* GameDeckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDeckModel.swift; sourceTree = "<group>"; };
 		0C88C2342C35BCE60061EEEC /* CompletedQuizQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedQuizQuestionView.swift; sourceTree = "<group>"; };
 		0C88C2362C35C3100061EEEC /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
@@ -152,7 +150,6 @@
 			children = (
 				0C88C2232C31DBC20061EEEC /* QuestionData.swift */,
 				0C88C2282C33A94E0061EEEC /* QuestionModel.swift */,
-				0C88C22C2C33AE650061EEEC /* ScoredCards.swift */,
 				0C88C2302C34F96C0061EEEC /* GameDeckModel.swift */,
 				0C355A122C35E5E200699DDB /* PlayerModel.swift */,
 				0C355A162C35E89C00699DDB /* LeaderModel.swift */,
@@ -242,7 +239,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C88C2312C34F96C0061EEEC /* GameDeckModel.swift in Sources */,
-				0C88C22D2C33AE650061EEEC /* ScoredCards.swift in Sources */,
 				0C88C2292C33A94E0061EEEC /* QuestionModel.swift in Sources */,
 				0C88C2352C35BCE60061EEEC /* CompletedQuizQuestionView.swift in Sources */,
 				0C355A282C36309300699DDB /* PlayerViewModel.swift in Sources */,

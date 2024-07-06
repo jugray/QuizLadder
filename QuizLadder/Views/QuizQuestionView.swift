@@ -10,7 +10,7 @@ import SwiftUI
 struct QuizQuestionView: View {
     
     let backgroundGradient = LinearGradient(
-        colors: [Color.dirtyWhite, Color.dirtyWhite],
+        colors: [Color.dirtyWhite],
         startPoint: .topTrailing   , endPoint: .bottomLeading)
     
     var qData : QuestionData
@@ -25,7 +25,7 @@ struct QuizQuestionView: View {
         ZStack{
             backgroundGradient
                 .ignoresSafeArea()
-                .opacity(0.5)
+                .opacity(0.8)
         VStack{
             VStack {
                 HStack{

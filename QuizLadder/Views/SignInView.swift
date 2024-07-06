@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SignInView: View {
     
-    var playerVM : PlayerViewModel
+    @StateObject var playerVM : PlayerViewModel
     @State var tempEmail = ""
     @State var tempPass = ""
     @Binding var quickLogin : Bool
@@ -21,83 +21,86 @@ struct SignInView: View {
         startPoint: .topLeading, endPoint: .bottomTrailing)
     
     var body: some View {
-        ZStack {
-            backgroundGradient
-                .ignoresSafeArea()
-            VStack {
-                Text("QuizLadder")
-                    .foregroundStyle(Color.nuRed)
-                    .font(.system(size: 60, weight: .heavy ,design: .monospaced))
-                    .italic()
+            ZStack {
+                backgroundGradient
+                    .ignoresSafeArea()
                 
-                Section{
-                    if currentUser == "" && !dismissFields {
-                        TextField("\tEmail", text: $tempEmail)
-                            .frame(height: 55)
-                            .background(.dirtyWhite)
-                            
-                        SecureField("\tPassword", text: $tempPass)
-                            .frame(height:55)
-                            .background(.dirtyWhite)
-                    }
-                    else {
-                        Text("Welcome back \(playerVM.currentPlayer.getEmail())")
-                    }
-                }
-                
-                .padding(.horizontal)
-                VStack{
-                    //Sign In User
-                    Button(action: {
-                        print("Attempting signin...")
-                        playerVM.loginUser(emailIn: tempEmail, passwordIn: tempPass)
-                        
-                        dismissFields = true
-                        quickLogin = false
-   
-                    }, label: {
+                    VStack(alignment: .leading) {
                         Text("Sign In")
-                            .frame(maxWidth: .infinity, alignment: .center)
+                            .foregroundStyle(Color.nuRed)
+                            .font(.system(size: 30, weight: .heavy))
+                            .italic()
+                            .padding()
                         
-                    })
-                    .buttonStyle(.bordered)
-                    .tint(.dirtyWhite)
+                    Section{
+                        if currentUser == "" && !dismissFields {
+                            TextField("\tEmail", text: $tempEmail)
+                                .frame(height: 55)
+                                .background(.dirtyWhite)
+                            
+                            SecureField("\tPassword", text: $tempPass)
+                                .frame(height:55)
+                                .background(.dirtyWhite)
+                        }
+                        else {
+                            Text("Signed in: \(playerVM.currentPlayer.getName())")
+                        }
+                    }
                     
-                    //Create new user
-                    Button(action: {
-                        playerVM.createUser(emailIn: tempEmail, passwordIn: tempPass)
-                        
-                    }, label: {
-                        Text("Register")
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    })
-                    .buttonStyle(.bordered)
-                    .tint(.dirtyWhite)
-                
-                    if currentUser != ""{
-                    //Sign out user
-                    Button(action: {
-                        playerVM.signOut()
-                        dismissFields = false
-                        currentUser = ""
-                       
-                                
+                    .padding(.horizontal)
+                    VStack{
+                        if dismissFields != true{
+                            //Sign In User
+                        Button(action: {
+                            print("Attempting signin...")
+                            playerVM.loginUser(emailIn: tempEmail, passwordIn: tempPass)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+                                dismissFields = true
+                            }
+                            
                         }, label: {
-                            Text("Sign Out")
-                            .frame(maxWidth: .infinity, alignment: .center)
+                            Text("Sign In")
+                                .frame(maxWidth: .infinity, alignment: .center)
+                            
+                        })
+                        .buttonStyle(.bordered)
+                        .tint(.dirtyWhite)
+                            
+                            //Create new user
+                            NavigationLink {
+                                RegisterView(playerVM: playerVM, tempEmail: $tempEmail, tempPass: $tempPass)
+                            } label: {
+                                Text("Reigster")
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                            }
+                            .buttonStyle(.bordered)
+                            .tint(.dirtyWhite)
+                        }
+                        
+                        if dismissFields == true{
+                            //Sign out user
+                            Button(action: {
+                                playerVM.signOut()
+                                dismissFields = false
+                                currentUser = ""
+                                
+                                
+                            }, label: {
+                                Text("Sign Out")
+                                    .frame(maxWidth: .infinity, alignment: .center)
                             })
                             .buttonStyle(.bordered)
                             .tint(.dirtyWhite)
-                        
+                            
+                        }
                     }
+                    .listRowBackground(Color.clear)
+                    .padding()
                 }
-                .listRowBackground(Color.clear)
-                .padding()
             }
         }
-    
     }
-}
+
 
 #Preview {
     struct Preview:View{

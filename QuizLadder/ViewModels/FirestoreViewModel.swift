@@ -19,13 +19,14 @@ class FirestoreViewModel : ObservableObject {
         return self.leaders 
     }
     
+    @MainActor
     func fetchLeaders() async{
         //clear local list fist
         leaders.removeAll()
         
         //get new ones
         do {
-            let querySnapshot = try await db.collection("Leaders").getDocuments()
+            let querySnapshot = try await db.collection("Leaders").order(by: "highScore", descending: true).getDocuments()
             for document in querySnapshot.documents {
                 self.leaders.append(try document.data(as: LeaderModel.self))
                 print("\(document.documentID) => \(document.data())")

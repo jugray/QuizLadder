@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LeaderboardView: View {
     
-    var playerVM : PlayerViewModel
+    @StateObject var fireStoreVM :FirestoreViewModel = FirestoreViewModel()
     
     let backgroundGradient = LinearGradient(
         colors: [Color("NuRed"),Color("NeonYellow"),Color("CoLightBlue"),Color("CoMidBlue"),Color("CoDarkBlue")],
@@ -21,44 +21,47 @@ struct LeaderboardView: View {
             backgroundGradient.ignoresSafeArea()
             
             VStack {
-                Section{
-                    Text("Top Climbers")
-                        .padding()
-                }
-                Section{
-                    List{
-                        ForEach(playerVM.currentPlayer.getFirestoreVM().getLeaders()) { leader in
-                            HStack{
-                                Text("\(leader.getPlayerName())")
-                                Spacer()
-                                Text("\(leader.getHighScore())")
-                            }
-                            .onAppear(){
-                                print("\nPosting ID: \n\(String(describing: leader.id))")
-                                print("Name: \(leader.getPlayerName())")
-                                print("Score: \(leader.getHighScore())")
-                            }
+                Text("Top Rungs")
+                    .foregroundStyle(Color.nuRed)
+                    .font(.system(size: 40, weight: .heavy))
+                    .italic()
+                List{
+                    ForEach(fireStoreVM.getLeaders()) { leader in
+                        HStack{
+                            Text("\(leader.getPlayerName())")
+                                .font(.system(size: 20))
+                            Spacer()
+                            Text("\(leader.getHighScore())pts")
+                                .font(.system(size: 20, weight: .heavy))
+                        }
+                        .foregroundColor(.dirtyWhite)
+                        .listRowBackground(Color.coYellow)
+                        .onAppear(){
+                            print("\nPosting ID: \n\(String(describing: leader.id))")
+                            print("Name: \(leader.getPlayerName())")
+                            print("Score: \(leader.getHighScore())")
                         }
                     }
                 }
+                
+                .opacity(0.8)
                 .padding()
             }
+            .offset(y:100)
             .onAppear{
                 print ("*** Loading Leaderboard *** ")
                 Task {
-                    await playerVM.currentPlayer.getFirestoreVM().fetchLeaders()
+                    await fireStoreVM.fetchLeaders()
                 }
                 print ("FirebaseDB connected, adding DB data:")
                 
             }
             .scrollContentBackground(.hidden)
-            
         }
+        
     }
 }
 
-
-
 #Preview {
-    LeaderboardView(playerVM: PlayerViewModel())
+    LeaderboardView()
 }

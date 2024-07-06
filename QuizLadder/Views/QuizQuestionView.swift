@@ -14,8 +14,8 @@ struct QuizQuestionView: View {
         startPoint: .topTrailing   , endPoint: .bottomLeading)
     
     var qData : QuestionData
-    var quizVM : QuizViewModel
-    var playerVM : PlayerViewModel
+    @ObservedObject var quizVM : QuizViewModel
+    @ObservedObject var playerVM : PlayerViewModel
     
     @Binding var gameOver : Bool
     
@@ -32,14 +32,17 @@ struct QuizQuestionView: View {
                     Image(systemName: "doc.questionmark.fill")
                         .imageScale(.large)
                         .foregroundStyle(.tint)
+                        .tint(.red)
+                        
                          Spacer()
                     Text("# \(quizVM.gameDeck.getCUrrentCardIndex()+1)")
                         .font(.system(size: 20))
-                        
                 }
+                
                 Text(qData.question)
                     .font(.system(size: 24))
                     .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.vertical)
             }
             .padding()
             VStack {

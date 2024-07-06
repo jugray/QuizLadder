@@ -34,12 +34,14 @@
                     //Score and current Question
                     Section {
                         HStack{
-                            Text(playerVM.currentPlayer.getEmail())
+                            Text(playerVM.currentPlayer.getName())
+                            Spacer()
+                            Text("Session Best: \(playerVM.currentPlayer.getHighScore())")
                         }
                         .listRowBackground(Color.clear)
                         .listRowSeparator(.hidden)
                         HStack{
-                            Text("Player Score: ")
+                            Text("Current Score: ")
                                 .font(.title)
                             Spacer()
                             Text("\(quizVM.gameDeck.getGameScore())")
@@ -63,6 +65,7 @@
                         else {
                             // Normal gameplay, load next card.
                             if (!quizVM.gameDeck.isGameOver() && quizVM.gameDeck.getCUrrentCardIndex() < quizVM.gameDeck.getLoadedQuestions().count){
+                              
                                 QuizQuestionView(qData: quizVM.gameDeck.getLoadedQuestions()[quizVM.gameDeck.getCUrrentCardIndex()], quizVM: quizVM, playerVM: playerVM, gameOver: $gameOver)
                                     .listRowBackground(Color.clear)
                                     .onAppear{
@@ -108,7 +111,7 @@
                     quizVM.newGame()
                     
                 }
-            }
+            }.navigationTitle("Quiz")
         }
     }
 

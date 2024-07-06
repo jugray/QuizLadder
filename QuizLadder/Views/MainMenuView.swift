@@ -22,7 +22,6 @@ struct MainMenuView: View {
     
     var body: some View {
         NavigationView{
-        
             ZStack{
                 backgroundGradient
                     .ignoresSafeArea()
@@ -35,8 +34,10 @@ struct MainMenuView: View {
                     
                         if currentUser != ""{
                     HStack{
-                        Text("Welcome back, \(playerVM.currentPlayer.getEmail())")
+                        Text("Watch your step, \(playerVM.currentPlayer.getName())!")
+                            .font(.system(size: 12))
                                 .padding(.horizontal)
+                                .italic()   
                         
                         Spacer()
                     }
@@ -52,7 +53,7 @@ struct MainMenuView: View {
                     }
                     
                     //Check Scores
-                    NavigationLink(destination: LeaderboardView(playerVM: playerVM)){
+                    NavigationLink(destination: LeaderboardView()){
                         Text("LeaderBoard")
                             .frame(maxWidth: .infinity, maxHeight: 50, alignment: .center)
                             .foregroundStyle(Color(.dirtyWhite))
@@ -98,8 +99,8 @@ struct MainMenuView: View {
                     
                     
                 }
-                
-            }.sheet(isPresented: $quickLogin, onDismiss: {
+               //Quick login seems buggy. Revisit if we refactor to enviornment object?
+            }/*.sheet(isPresented: $quickLogin, onDismiss: {
                 if playerVM.currentPlayer.getPlayerID() != ""{
                     currentUser = playerVM.currentPlayer.getEmail()
                 }
@@ -109,8 +110,10 @@ struct MainMenuView: View {
                     SignInView(playerVM: PlayerViewModel(), quickLogin: $quickLogin, currentUser: $currentUser)
                         
                     }
+              */
             
         }
+             
     }
 }
 

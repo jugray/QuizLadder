@@ -18,7 +18,7 @@ struct MainMenuView: View {
     
     //Another hack workaround...
     @State var currentUser : String = ""
-    @State var quickLogin = true
+    @State var loading = true
     
     var body: some View {
         NavigationView{
@@ -32,65 +32,73 @@ struct MainMenuView: View {
                         .font(.system(size: 60, weight: .heavy ,design: .monospaced))
                         .italic()
                     
+                    if loading == false {
                         if currentUser != ""{
-                    HStack{
-                        Text("Watch your step, \(playerVM.currentPlayer.getName())!")
-                            .foregroundColor(.neonYellow)
-                            .font(.system(size: 18))
-                                .padding(.horizontal)
-                                .italic()   
-                        
-                        Spacer()
-                    }
- 
-                    //Play Game
-                    NavigationLink(destination: GameView(playerVM: playerVM)){
-                        Text("New Game")
-                            .frame(maxWidth: 300, maxHeight: 50, alignment: .center)
-                            .foregroundStyle(Color(.coYellow))
-                            .font(.system(size: 20, weight: .heavy ,design: .monospaced))
-                            .background(Color.dirtyWhite)
-                            .cornerRadius(12)
-                            .padding()
-                    }
-                    
-                    //Check Scores
-                    NavigationLink(destination: LeaderboardView()){
-                        Text("LeaderBoard")
-                            .frame(maxWidth: 300, maxHeight: 50, alignment: .center)
-                            .foregroundStyle(Color(.coYellow))
-                            .font(.system(size: 20, weight: .heavy ,design: .monospaced))
-                            .background(Color.dirtyWhite)
-                            .cornerRadius(12)
-                            .padding()
-                    }
-                    
-                    //Sign In / Sign Out
-                    if playerVM.currentPlayer.getloggedIn() == true{
-                        NavigationLink(destination: SignInView(playerVM: playerVM, quickLogin: $quickLogin, currentUser: $currentUser)){
-                            Text("Sign Out")
-                                .frame(maxWidth: 300, maxHeight: 50, alignment: .center)
-                                .foregroundStyle(Color(.coYellow))
-                                .font(.system(size: 20, weight: .heavy ,design: .monospaced))
-                                .background(Color.dirtyWhite)
-                                .cornerRadius(12)
-                                .padding()
+                            HStack{
+                                Text("Watch your step, \(playerVM.currentPlayer.getName())!")
+                                    .foregroundColor(.neonYellow)
+                                    .font(.system(size: 18))
+                                    .padding(.horizontal)
+                                    .italic()
+                                
+                                Spacer()
+                            }
+                            
+                                //Play Game
+                            NavigationLink(destination: GameView(playerVM: playerVM)){
+                                Text("New Game")
+                                    .frame(maxWidth: 300, maxHeight: 50, alignment: .center)
+                                    .foregroundStyle(Color(.coYellow))
+                                    .font(.system(size: 20, weight: .heavy ,design: .monospaced))
+                                    .background(Color.dirtyWhite)
+                                    .cornerRadius(12)
+                                    .padding()
+                            }
+                            
+                                //Check Scores
+                            NavigationLink(destination: LeaderboardView()){
+                                Text("LeaderBoard")
+                                    .frame(maxWidth: 300, maxHeight: 50, alignment: .center)
+                                    .foregroundStyle(Color(.coYellow))
+                                    .font(.system(size: 20, weight: .heavy ,design: .monospaced))
+                                    .background(Color.dirtyWhite)
+                                    .cornerRadius(12)
+                                    .padding()
+                            }
+                            
+                                //Sign In / Sign Out
+                            if playerVM.currentPlayer.getloggedIn() == true{
+                                NavigationLink(destination: SignInView(playerVM: playerVM,  currentUser: $currentUser)){
+                                    Text("Sign Out")
+                                        .frame(maxWidth: 300, maxHeight: 50, alignment: .center)
+                                        .foregroundStyle(Color(.coYellow))
+                                        .font(.system(size: 20, weight: .heavy ,design: .monospaced))
+                                        .background(Color.dirtyWhite)
+                                        .cornerRadius(12)
+                                        .padding()
+                                }
                             }
                         }
-                    }
-                    else{
-                        NavigationLink(destination: SignInView(playerVM: playerVM, quickLogin: $quickLogin, currentUser: $currentUser)){
-                            Text("Sign In")
-                                .frame(maxWidth: 300, maxHeight: 50, alignment: .center)
-                                .foregroundStyle(Color(.coYellow))
-                                .font(.system(size: 20, weight: .heavy ,design: .monospaced))
-                                .background(Color.dirtyWhite)
-                                .cornerRadius(12)
-                                .padding()
+                        else{
+                            NavigationLink(destination: SignInView(playerVM: playerVM, currentUser: $currentUser)){
+                                Text("Sign In")
+                                    .frame(maxWidth: 300, maxHeight: 50, alignment: .center)
+                                    .foregroundStyle(Color(.coYellow))
+                                    .font(.system(size: 20, weight: .heavy ,design: .monospaced))
+                                    .background(Color.dirtyWhite)
+                                    .cornerRadius(12)
+                                    .padding()
+                            }
                         }
                     }
                 }
                 .onAppear{
+                    DispatchQueue.main.asyncAfter(deadline: .now()+1){
+                        withAnimation{
+                            loading = false
+                        }
+                    }
+                    
                     print("\n\n*** Quiz Ladder Main Menu ***")
                     print("User Signed In: \(playerVM.currentPlayer.getloggedIn())")
                     print("Current User: \(playerVM.currentPlayer.getName())")
@@ -117,7 +125,7 @@ struct MainMenuView: View {
                     }
               */
             
-        }
+        }.tint(.coDarkBlue)
              
     }
 }

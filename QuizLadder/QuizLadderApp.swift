@@ -29,9 +29,16 @@ struct QuizLadderApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
+    let backgroundGradient = LinearGradient(
+        colors: [Color.green,Color.mint],
+        startPoint: .top, endPoint: .bottomTrailing)
+    
     var body: some Scene {
+        
         WindowGroup {
             MainMenuView()
+               
         }
     }
+    
 }
